@@ -82,11 +82,6 @@
       <to>user LU</to>
       <enabled>Y</enabled>
     </hop>
-    <hop>
-      <from>:Post</from>
-      <to>POST_IN_THREAD</to>
-      <enabled>N</enabled>
-    </hop>
   </order>
   <transform>
     <name>:Post</name>
@@ -239,6 +234,345 @@
     </GUI>
   </transform>
   <transform>
+    <name>build url</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>//Script here
+
+var url = getVariable('mattermost_url', '') + '/api/v4/channels/' + channel_id + '/posts?since=1';</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>url</name>
+        <rename>url</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <GUI>
+      <xloc>480</xloc>
+      <yloc>80</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>channel LU</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>get channel</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>channel_id</name>
+        <field>c.id</field>
+      </key>
+      <value>
+        <name>c.displayName</name>
+        <rename>c.displayName</rename>
+        <default/>
+        <type>String</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <GUI>
+      <xloc>1088</xloc>
+      <yloc>80</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>clean, epoch -> date</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>id</name>
+      </field>
+      <field>
+        <name>create_at</name>
+      </field>
+      <field>
+        <name>update_at</name>
+      </field>
+      <field>
+        <name>edit_at</name>
+      </field>
+      <field>
+        <name>delete_at</name>
+      </field>
+      <field>
+        <name>is_pinned</name>
+      </field>
+      <field>
+        <name>user_id</name>
+      </field>
+      <field>
+        <name>channel_id</name>
+      </field>
+      <field>
+        <name>root_id</name>
+      </field>
+      <field>
+        <name>parent_id</name>
+      </field>
+      <field>
+        <name>original_id</name>
+      </field>
+      <field>
+        <name>message</name>
+      </field>
+      <field>
+        <name>type</name>
+      </field>
+      <field>
+        <name>props_disable_group_highlight</name>
+      </field>
+      <field>
+        <name>hashtags</name>
+      </field>
+      <field>
+        <name>pending_post_id</name>
+      </field>
+      <field>
+        <name>reply_count</name>
+      </field>
+      <field>
+        <name>metadata</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>create_at</name>
+        <rename>create_at</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>0</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>update_at</name>
+        <rename>update_at</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>0</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>edit_at</name>
+        <rename>edit_at</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>0</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>delete_at</name>
+        <rename>delete_at</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>0</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <GUI>
+      <xloc>976</xloc>
+      <yloc>80</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>get channel</name>
+    <type>Neo4jCypherOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>lineage-graph</connection>
+    <cypher>match(c:Channel) 
+return c.id, c.displayName</cypher>
+    <batch_size/>
+    <read_only>N</read_only>
+    <retry>Y</retry>
+    <cypher_from_field>N</cypher_from_field>
+    <cypher_field/>
+    <unwind>N</unwind>
+    <unwind_map/>
+    <returning_graph>N</returning_graph>
+    <return_graph_field/>
+    <mappings/>
+    <returns>
+      <return>
+        <name>c.id</name>
+        <type>String</type>
+        <source_type>String</source_type>
+      </return>
+      <return>
+        <name>c.displayName</name>
+        <type>String</type>
+        <source_type>String</source_type>
+      </return>
+    </returns>
+    <attributes/>
+    <GUI>
+      <xloc>1088</xloc>
+      <yloc>224</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>get channel ids</name>
+    <type>Neo4jCypherOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>lineage-graph</connection>
+    <cypher>match (c:Channel) return c.id</cypher>
+    <batch_size/>
+    <read_only>N</read_only>
+    <retry>Y</retry>
+    <cypher_from_field>N</cypher_from_field>
+    <cypher_field/>
+    <unwind>N</unwind>
+    <unwind_map/>
+    <returning_graph>N</returning_graph>
+    <return_graph_field/>
+    <mappings/>
+    <returns>
+      <return>
+        <name>c.id</name>
+        <type>String</type>
+        <source_type>String</source_type>
+      </return>
+    </returns>
+    <attributes/>
+    <GUI>
+      <xloc>64</xloc>
+      <yloc>80</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>get posts</name>
+    <type>Rest</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <applicationType>TEXT PLAIN</applicationType>
+    <method>GET</method>
+    <url/>
+    <urlInField>Y</urlInField>
+    <dynamicMethod>N</dynamicMethod>
+    <methodFieldName/>
+    <urlField>url</urlField>
+    <bodyField/>
+    <httpLogin/>
+    <httpPassword>Encrypted </httpPassword>
+    <proxyHost/>
+    <proxyPort/>
+    <preemptive>N</preemptive>
+    <trustStoreFile/>
+    <trustStorePassword>Encrypted </trustStorePassword>
+    <headers>
+      <header>
+        <field>bearer</field>
+        <name>Authorization</name>
+      </header>
+    </headers>
+    <parameters>
+      </parameters>
+    <matrixParameters>
+      </matrixParameters>
+    <result>
+      <name>result</name>
+      <code>http_status</code>
+      <response_time/>
+      <response_header>http_response_header</response_header>
+    </result>
+    <attributes/>
+    <GUI>
+      <xloc>608</xloc>
+      <yloc>80</yloc>
+    </GUI>
+  </transform>
+  <transform>
     <name>get token</name>
     <type>GetVariable</type>
     <description/>
@@ -270,8 +604,8 @@
     </GUI>
   </transform>
   <transform>
-    <name>parse posts</name>
-    <type>JsonInput</type>
+    <name>get user</name>
+    <type>Neo4jCypherOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -280,55 +614,34 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <include>N</include>
-    <include_field/>
-    <rownum>N</rownum>
-    <addresultfile>N</addresultfile>
-    <readurl>N</readurl>
-    <removeSourceField>N</removeSourceField>
-    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
-    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
-    <ignoreMissingPath>Y</ignoreMissingPath>
-    <defaultPathLeafToNull>Y</defaultPathLeafToNull>
-    <rownum_field/>
-    <file>
-      <name/>
-      <filemask/>
-      <exclude_filemask/>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <fields>
-      <field>
-        <name>posts</name>
-        <path>$.posts</path>
+    <connection>lineage-graph</connection>
+    <cypher>match(u:User) return u.id, u.username</cypher>
+    <batch_size/>
+    <read_only>N</read_only>
+    <retry>Y</retry>
+    <cypher_from_field>N</cypher_from_field>
+    <cypher_field/>
+    <unwind>N</unwind>
+    <unwind_map/>
+    <returning_graph>N</returning_graph>
+    <return_graph_field/>
+    <mappings/>
+    <returns>
+      <return>
+        <name>u.id</name>
         <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-    </fields>
-    <limit>0</limit>
-    <IsInFields>Y</IsInFields>
-    <IsAFile>N</IsAFile>
-    <valueField>result</valueField>
-    <shortFileFieldName/>
-    <pathFieldName/>
-    <hiddenFieldName/>
-    <lastModificationTimeFieldName/>
-    <uriNameFieldName/>
-    <rootUriNameFieldName/>
-    <extensionFieldName/>
-    <sizeFieldName/>
+        <source_type>String</source_type>
+      </return>
+      <return>
+        <name>u.username</name>
+        <type>String</type>
+        <source_type>String</source_type>
+      </return>
+    </returns>
     <attributes/>
     <GUI>
-      <xloc>736</xloc>
-      <yloc>80</yloc>
+      <xloc>1200</xloc>
+      <yloc>224</yloc>
     </GUI>
   </transform>
   <transform>
@@ -615,8 +928,8 @@
     </GUI>
   </transform>
   <transform>
-    <name>build url</name>
-    <type>ScriptValueMod</type>
+    <name>parse posts</name>
+    <type>JsonInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -625,135 +938,54 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>//Script here
-
-var url = getVariable('mattermost_url', '') + '/api/v4/channels/' + channel_id + '/posts?since=1';</jsScript_script>
-      </jsScript>
-    </jsScripts>
+    <include>N</include>
+    <include_field/>
+    <rownum>N</rownum>
+    <addresultfile>N</addresultfile>
+    <readurl>N</readurl>
+    <removeSourceField>N</removeSourceField>
+    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <ignoreMissingPath>Y</ignoreMissingPath>
+    <defaultPathLeafToNull>Y</defaultPathLeafToNull>
+    <rownum_field/>
+    <file>
+      <name/>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
     <fields>
       <field>
-        <name>url</name>
-        <rename>url</rename>
+        <name>posts</name>
+        <path>$.posts</path>
         <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
         <length>-1</length>
         <precision>-1</precision>
-        <replace>N</replace>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
       </field>
     </fields>
+    <limit>0</limit>
+    <IsInFields>Y</IsInFields>
+    <IsAFile>N</IsAFile>
+    <valueField>result</valueField>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
     <attributes/>
     <GUI>
-      <xloc>480</xloc>
-      <yloc>80</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>POST_IN_THREAD</name>
-    <type>Neo4JOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>lineage-graph</connection>
-    <batch_size>1000</batch_size>
-    <key/>
-    <create_indexes>N</create_indexes>
-    <use_create>N</use_create>
-    <only_create_relationships>Y</only_create_relationships>
-    <returning_graph>N</returning_graph>
-    <return_graph_field>graph</return_graph_field>
-    <from>
-      <read_only_from_node>N</read_only_from_node>
-      <labels>
-        <label/>
-        <value>Post</value>
-      </labels>
-      <properties>
-        <property>
-          <name>id</name>
-          <value>id</value>
-          <type>String</type>
-          <primary>N</primary>
-        </property>
-      </properties>
-    </from>
-    <to>
-      <read_only_to_node>N</read_only_to_node>
-      <labels>
-        <label/>
-        <value>Post</value>
-      </labels>
-      <properties>
-        <property>
-          <name>id</name>
-          <value>parent_id</value>
-          <type>String</type>
-          <primary>N</primary>
-        </property>
-      </properties>
-    </to>
-    <relationship/>
-    <relationship_value>POST_IN_THREAD</relationship_value>
-    <relprops/>
-    <attributes/>
-    <GUI>
-      <xloc>1472</xloc>
-      <yloc>80</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>get posts</name>
-    <type>Rest</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <applicationType>TEXT PLAIN</applicationType>
-    <method>GET</method>
-    <url/>
-    <urlInField>Y</urlInField>
-    <dynamicMethod>N</dynamicMethod>
-    <methodFieldName/>
-    <urlField>url</urlField>
-    <bodyField/>
-    <httpLogin/>
-    <httpPassword>Encrypted </httpPassword>
-    <proxyHost/>
-    <proxyPort/>
-    <preemptive>N</preemptive>
-    <trustStoreFile/>
-    <trustStorePassword>Encrypted </trustStorePassword>
-    <headers>
-      <header>
-        <field>bearer</field>
-        <name>Authorization</name>
-      </header>
-    </headers>
-    <parameters>
-      </parameters>
-    <matrixParameters>
-      </matrixParameters>
-    <result>
-      <name>result</name>
-      <code>http_status</code>
-      <response_time/>
-      <response_header>http_response_header</response_header>
-    </result>
-    <attributes/>
-    <GUI>
-      <xloc>608</xloc>
+      <xloc>736</xloc>
       <yloc>80</yloc>
     </GUI>
   </transform>
@@ -779,319 +1011,6 @@ var url = getVariable('mattermost_url', '') + '/api/v4/channels/' + channel_id +
     <GUI>
       <xloc>192</xloc>
       <yloc>80</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>clean, epoch -> date</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>create_at</name>
-        <rename/>
-      </field>
-      <field>
-        <name>update_at</name>
-        <rename/>
-      </field>
-      <field>
-        <name>edit_at</name>
-        <rename/>
-      </field>
-      <field>
-        <name>delete_at</name>
-        <rename/>
-      </field>
-      <field>
-        <name>is_pinned</name>
-        <rename/>
-      </field>
-      <field>
-        <name>user_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>channel_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>root_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>parent_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>original_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>message</name>
-        <rename/>
-      </field>
-      <field>
-        <name>type</name>
-        <rename/>
-      </field>
-      <field>
-        <name>props_disable_group_highlight</name>
-        <rename/>
-      </field>
-      <field>
-        <name>hashtags</name>
-        <rename/>
-      </field>
-      <field>
-        <name>pending_post_id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>reply_count</name>
-        <rename/>
-      </field>
-      <field>
-        <name>metadata</name>
-        <rename/>
-      </field>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>create_at</name>
-        <rename>create_at</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>0</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>update_at</name>
-        <rename>update_at</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>0</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>edit_at</name>
-        <rename>edit_at</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>0</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>delete_at</name>
-        <rename>delete_at</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>0</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-    </fields>
-    <attributes/>
-    <GUI>
-      <xloc>976</xloc>
-      <yloc>80</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>channel LU</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <from>get channel</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>channel_id</name>
-        <field>c.id</field>
-      </key>
-      <value>
-        <name>c.displayName</name>
-        <rename>c.displayName</rename>
-        <default/>
-        <type>String</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <GUI>
-      <xloc>1088</xloc>
-      <yloc>80</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>get channel</name>
-    <type>Neo4jCypherOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>lineage-graph</connection>
-    <cypher>match(c:Channel) 
-return c.id, c.displayName</cypher>
-    <batch_size/>
-    <read_only>N</read_only>
-    <retry>Y</retry>
-    <cypher_from_field>N</cypher_from_field>
-    <cypher_field/>
-    <unwind>N</unwind>
-    <unwind_map/>
-    <returning_graph>N</returning_graph>
-    <return_graph_field/>
-    <mappings/>
-    <returns>
-      <return>
-        <name>c.id</name>
-        <type>String</type>
-        <source_type>String</source_type>
-      </return>
-      <return>
-        <name>c.displayName</name>
-        <type>String</type>
-        <source_type>String</source_type>
-      </return>
-    </returns>
-    <attributes/>
-    <GUI>
-      <xloc>1088</xloc>
-      <yloc>224</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>get channel ids</name>
-    <type>Neo4jCypherOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>lineage-graph</connection>
-    <cypher>match (c:Channel) return c.id</cypher>
-    <batch_size/>
-    <read_only>N</read_only>
-    <retry>Y</retry>
-    <cypher_from_field>N</cypher_from_field>
-    <cypher_field/>
-    <unwind>N</unwind>
-    <unwind_map/>
-    <returning_graph>N</returning_graph>
-    <return_graph_field/>
-    <mappings/>
-    <returns>
-      <return>
-        <name>c.id</name>
-        <type>String</type>
-        <source_type>String</source_type>
-      </return>
-    </returns>
-    <attributes/>
-    <GUI>
-      <xloc>64</xloc>
-      <yloc>80</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>get user</name>
-    <type>Neo4jCypherOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>lineage-graph</connection>
-    <cypher>match(u:User) return u.id, u.username</cypher>
-    <batch_size/>
-    <read_only>N</read_only>
-    <retry>Y</retry>
-    <cypher_from_field>N</cypher_from_field>
-    <cypher_field/>
-    <unwind>N</unwind>
-    <unwind_map/>
-    <returning_graph>N</returning_graph>
-    <return_graph_field/>
-    <mappings/>
-    <returns>
-      <return>
-        <name>u.id</name>
-        <type>String</type>
-        <source_type>String</source_type>
-      </return>
-      <return>
-        <name>u.username</name>
-        <type>String</type>
-        <source_type>String</source_type>
-      </return>
-    </returns>
-    <attributes/>
-    <GUI>
-      <xloc>1200</xloc>
-      <yloc>224</yloc>
     </GUI>
   </transform>
   <transform>
