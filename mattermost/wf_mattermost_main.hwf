@@ -60,7 +60,7 @@
       </parameters>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>308</xloc>
+      <xloc>197</xloc>
       <yloc>64</yloc>
       <attributes_hac/>
     </action>
@@ -90,7 +90,7 @@
       </parameters>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>528</xloc>
+      <xloc>431</xloc>
       <yloc>64</yloc>
       <attributes_hac/>
     </action>
@@ -120,7 +120,7 @@
       </parameters>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>650</xloc>
+      <xloc>548</xloc>
       <yloc>64</yloc>
       <attributes_hac/>
     </action>
@@ -150,7 +150,7 @@
       </parameters>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>422</xloc>
+      <xloc>314</xloc>
       <yloc>64</yloc>
       <attributes_hac/>
     </action>
@@ -180,16 +180,16 @@
       </parameters>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>764</xloc>
+      <xloc>665</xloc>
       <yloc>64</yloc>
       <attributes_hac/>
     </action>
     <action>
-      <name>Delete Neo4j indexes</name>
+      <name>create post relationships</name>
       <description/>
       <type>PIPELINE</type>
       <attributes/>
-      <filename>${PROJECT_HOME}/mattermost/pl_delete_neo4j_indexes.hpl</filename>
+      <filename>${PROJECT_HOME}/mattermost/pl_get_mattermost_post_relationships.hpl</filename>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
@@ -210,37 +210,7 @@
       </parameters>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>194</xloc>
-      <yloc>64</yloc>
-      <attributes_hac/>
-    </action>
-    <action>
-      <name>create post follows</name>
-      <description/>
-      <type>PIPELINE</type>
-      <attributes/>
-      <filename>${PROJECT_HOME}/mattermost/pl_create_post_follows_relationship.hpl</filename>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <run_configuration>local</run_configuration>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <parallel>N</parallel>
-      <nr>0</nr>
-      <xloc>878</xloc>
+      <xloc>782</xloc>
       <yloc>64</yloc>
       <attributes_hac/>
     </action>
@@ -283,31 +253,22 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>START</from>
-      <to>Delete Neo4j indexes</to>
+      <from>get posts</from>
+      <to>create post relationships</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
+      <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Delete Neo4j indexes</from>
+      <from>START</from>
       <to>get token</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>get posts</from>
-      <to>create post follows</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
+      <unconditional>Y</unconditional>
     </hop>
   </hops>
   <notepads>

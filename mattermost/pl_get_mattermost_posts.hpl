@@ -38,11 +38,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>get token</from>
-      <to>build url</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>parse posts</from>
       <to>parse post details</to>
       <enabled>Y</enabled>
@@ -58,18 +53,8 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>clean, epoch -> date</from>
-      <to>channel LU</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>channel LU</from>
       <to>user LU</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>user LU</from>
-      <to>:Post</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -82,7 +67,130 @@
       <to>user LU</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>get token</from>
+      <to>get Nb Pages</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get Nb Pages</from>
+      <to>Clone NbPages</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Clone NbPages</from>
+      <to>pageNb counter</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>pageNb counter</from>
+      <to>build url</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>keep id</from>
+      <to>get prev_id</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>parse order ids</from>
+      <to>keep id</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>parse posts</from>
+      <to>parse order ids</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get prev_id</from>
+      <to>wait for :Post</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>wait for :Post</from>
+      <to>:FOLLOWS</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>clean, epoch -> date</from>
+      <to>channel LU</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>user LU</from>
+      <to>no null Ids</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>no null Ids</from>
+      <to>Text file output</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>no null Ids</from>
+      <to>:Post</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <transform>
+    <name>:FOLLOWS</name>
+    <type>Neo4JOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>lineage-graph</connection>
+    <batch_size>1000</batch_size>
+    <key/>
+    <create_indexes>N</create_indexes>
+    <use_create>N</use_create>
+    <only_create_relationships>Y</only_create_relationships>
+    <returning_graph>N</returning_graph>
+    <return_graph_field>graph</return_graph_field>
+    <from>
+      <read_only_from_node>N</read_only_from_node>
+      <labels>
+        <label/>
+        <value>Post</value>
+      </labels>
+      <properties>
+        <property>
+          <name>id</name>
+          <value>id</value>
+          <type>String</type>
+          <primary>Y</primary>
+        </property>
+      </properties>
+    </from>
+    <to>
+      <read_only_to_node>N</read_only_to_node>
+      <labels>
+        <label/>
+        <value>Post</value>
+      </labels>
+      <properties>
+        <property>
+          <name>id</name>
+          <value>prev_id</value>
+          <type>String</type>
+          <primary>Y</primary>
+        </property>
+      </properties>
+    </to>
+    <relationship/>
+    <relationship_value>FOLLOWS</relationship_value>
+    <relprops/>
+    <attributes/>
+    <GUI>
+      <xloc>1760</xloc>
+      <yloc>336</yloc>
+    </GUI>
+  </transform>
   <transform>
     <name>:Post</name>
     <type>Neo4JOutput</type>
@@ -147,13 +255,13 @@
         </property>
         <property>
           <name>username</name>
-          <value>u.username</value>
+          <value>username</value>
           <type>String</type>
           <primary>N</primary>
         </property>
         <property>
           <name>channel</name>
-          <value>c.displayName</value>
+          <value>displayName</value>
           <type>String</type>
           <primary>N</primary>
         </property>
@@ -229,8 +337,297 @@
     <relprops/>
     <attributes/>
     <GUI>
-      <xloc>1312</xloc>
+      <xloc>1760</xloc>
       <yloc>80</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Clone NbPages</name>
+    <type>CloneRow</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <nrclones>0</nrclones>
+    <addcloneflag>N</addcloneflag>
+    <cloneflagfield/>
+    <nrcloneinfield>Y</nrcloneinfield>
+    <nrclonefield>nbPages</nrclonefield>
+    <addclonenum>N</addclonenum>
+    <clonenumfield/>
+    <attributes/>
+    <GUI>
+      <xloc>576</xloc>
+      <yloc>80</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Text file output</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator>;</separator>
+    <enclosure>"</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>Y</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding>US-ASCII</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>/tmp/error-posts</name>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>csv</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery/>
+    </file>
+    <fields>
+      <field>
+        <name>id</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>create_at</name>
+        <type>Date</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>update_at</name>
+        <type>Date</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>edit_at</name>
+        <type>Date</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>delete_at</name>
+        <type>Date</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>is_pinned</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>user_id</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>channel_id</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>root_id</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>parent_id</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>original_id</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>message</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>type</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>props_disable_group_highlight</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>hashtags</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>pending_post_id</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>reply_count</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>metadata</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <attributes/>
+    <GUI>
+      <xloc>1664</xloc>
+      <yloc>224</yloc>
     </GUI>
   </transform>
   <transform>
@@ -251,7 +648,7 @@
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>//Script here
 
-var url = getVariable('mattermost_url', '') + '/api/v4/channels/' + channel_id + '/posts?since=1';</jsScript_script>
+var url = getVariable('mattermost_url', '') + '/api/v4/channels/' + channel_id + '/posts?page=' + pageNb;</jsScript_script>
       </jsScript>
     </jsScripts>
     <fields>
@@ -266,7 +663,7 @@ var url = getVariable('mattermost_url', '') + '/api/v4/channels/' + channel_id +
     </fields>
     <attributes/>
     <GUI>
-      <xloc>480</xloc>
+      <xloc>816</xloc>
       <yloc>80</yloc>
     </GUI>
   </transform>
@@ -293,14 +690,14 @@ var url = getVariable('mattermost_url', '') + '/api/v4/channels/' + channel_id +
       </key>
       <value>
         <name>c.displayName</name>
-        <rename>c.displayName</rename>
+        <rename>displayName</rename>
         <default/>
         <type>String</type>
       </value>
     </lookup>
     <attributes/>
     <GUI>
-      <xloc>1088</xloc>
+      <xloc>1440</xloc>
       <yloc>80</yloc>
     </GUI>
   </transform>
@@ -442,7 +839,70 @@ var url = getVariable('mattermost_url', '') + '/api/v4/channels/' + channel_id +
     </fields>
     <attributes/>
     <GUI>
-      <xloc>976</xloc>
+      <xloc>1312</xloc>
+      <yloc>80</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>get Nb Pages</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <failIfNoFile>Y</failIfNoFile>
+    <calculation>
+      <field_name>pageCount</field_name>
+      <calc_type>CONSTANT</calc_type>
+      <field_a>60.0</field_a>
+      <field_b/>
+      <field_c/>
+      <value_type>Number</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>Y</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <calculation>
+      <field_name>tmpNbPages</field_name>
+      <calc_type>DIVIDE</calc_type>
+      <field_a>totalMsgCount</field_a>
+      <field_b>pageCount</field_b>
+      <field_c/>
+      <value_type>Number</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>Y</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <calculation>
+      <field_name>nbPages</field_name>
+      <calc_type>CEIL</calc_type>
+      <field_a>tmpNbPages</field_a>
+      <field_b/>
+      <field_c/>
+      <value_type>Integer</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <attributes/>
+    <GUI>
+      <xloc>464</xloc>
       <yloc>80</yloc>
     </GUI>
   </transform>
@@ -484,7 +944,7 @@ return c.id, c.displayName</cypher>
     </returns>
     <attributes/>
     <GUI>
-      <xloc>1088</xloc>
+      <xloc>1440</xloc>
       <yloc>224</yloc>
     </GUI>
   </transform>
@@ -500,7 +960,7 @@ return c.id, c.displayName</cypher>
       <schema_name/>
     </partitioning>
     <connection>lineage-graph</connection>
-    <cypher>match (c:Channel) return c.id</cypher>
+    <cypher>match (c:Channel) return c.id, toInteger(c.totalMsgCount) as totalMsgCount</cypher>
     <batch_size/>
     <read_only>N</read_only>
     <retry>Y</retry>
@@ -516,6 +976,11 @@ return c.id, c.displayName</cypher>
         <name>c.id</name>
         <type>String</type>
         <source_type>String</source_type>
+      </return>
+      <return>
+        <name>totalMsgCount</name>
+        <type>Number</type>
+        <source_type>Integer</source_type>
       </return>
     </returns>
     <attributes/>
@@ -568,8 +1033,35 @@ return c.id, c.displayName</cypher>
     </result>
     <attributes/>
     <GUI>
-      <xloc>608</xloc>
+      <xloc>944</xloc>
       <yloc>80</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>get prev_id</name>
+    <type>AnalyticQuery</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <group>
+      </group>
+    <fields>
+      <field>
+        <aggregate>prev_id</aggregate>
+        <subject>id</subject>
+        <type>LAG</type>
+        <valuefield>1</valuefield>
+      </field>
+    </fields>
+    <attributes/>
+    <GUI>
+      <xloc>1424</xloc>
+      <yloc>336</yloc>
     </GUI>
   </transform>
   <transform>
@@ -640,8 +1132,145 @@ return c.id, c.displayName</cypher>
     </returns>
     <attributes/>
     <GUI>
-      <xloc>1200</xloc>
+      <xloc>1552</xloc>
       <yloc>224</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>keep id</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>id</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <GUI>
+      <xloc>1312</xloc>
+      <yloc>336</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>no null Ids</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to>:Post</send_true_to>
+    <send_false_to>Text file output</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>id</leftvalue>
+        <function>IS NOT NULL</function>
+        <rightvalue/>
+      </condition>
+    </compare>
+    <attributes/>
+    <GUI>
+      <xloc>1664</xloc>
+      <yloc>80</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>pageNb counter</name>
+    <type>FieldsChangeSequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <start>0</start>
+    <increment>1</increment>
+    <resultfieldName>pageNb</resultfieldName>
+    <fields>
+      <field>
+        <name>channel_id</name>
+      </field>
+    </fields>
+    <attributes/>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>80</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>parse order ids</name>
+    <type>JsonInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <include>N</include>
+    <include_field/>
+    <rownum>N</rownum>
+    <addresultfile>N</addresultfile>
+    <readurl>N</readurl>
+    <removeSourceField>N</removeSourceField>
+    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <ignoreMissingPath>Y</ignoreMissingPath>
+    <defaultPathLeafToNull>Y</defaultPathLeafToNull>
+    <rownum_field/>
+    <file>
+      <name/>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <fields>
+      <field>
+        <name>id</name>
+        <path>$.*.</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+    </fields>
+    <limit>0</limit>
+    <IsInFields>Y</IsInFields>
+    <IsAFile>N</IsAFile>
+    <valueField>order</valueField>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
+    <attributes/>
+    <GUI>
+      <xloc>1184</xloc>
+      <yloc>336</yloc>
     </GUI>
   </transform>
   <transform>
@@ -923,7 +1552,7 @@ return c.id, c.displayName</cypher>
     <sizeFieldName/>
     <attributes/>
     <GUI>
-      <xloc>848</xloc>
+      <xloc>1184</xloc>
       <yloc>80</yloc>
     </GUI>
   </transform>
@@ -931,7 +1560,7 @@ return c.id, c.displayName</cypher>
     <name>parse posts</name>
     <type>JsonInput</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -970,6 +1599,19 @@ return c.id, c.displayName</cypher>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
+      <field>
+        <name>order</name>
+        <path>$.order</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
     </fields>
     <limit>0</limit>
     <IsInFields>Y</IsInFields>
@@ -985,7 +1627,7 @@ return c.id, c.displayName</cypher>
     <sizeFieldName/>
     <attributes/>
     <GUI>
-      <xloc>736</xloc>
+      <xloc>1072</xloc>
       <yloc>80</yloc>
     </GUI>
   </transform>
@@ -1004,6 +1646,9 @@ return c.id, c.displayName</cypher>
       <field>
         <name>c.id</name>
         <rename>channel_id</rename>
+      </field>
+      <field>
+        <name>totalMsgCount</name>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1036,15 +1681,38 @@ return c.id, c.displayName</cypher>
       </key>
       <value>
         <name>u.username</name>
-        <rename>u.username</rename>
+        <rename>username</rename>
         <default/>
         <type>String</type>
       </value>
     </lookup>
     <attributes/>
     <GUI>
-      <xloc>1200</xloc>
+      <xloc>1552</xloc>
       <yloc>80</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>wait for :Post</name>
+    <type>BlockUntilTransformsFinish</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <transforms>
+      <transform>
+        <name>:Post</name>
+        <CopyNr>0</CopyNr>
+      </transform>
+    </transforms>
+    <attributes/>
+    <GUI>
+      <xloc>1536</xloc>
+      <yloc>336</yloc>
     </GUI>
   </transform>
   <transform_error_handling>
