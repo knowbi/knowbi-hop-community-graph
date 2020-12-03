@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pipeline>
   <info>
-    <name>remove labels in blocks</name>
+    <name>rename labels in blocks</name>
     <name_sync_with_filename>N</name_sync_with_filename>
     <description/>
     <extended_description/>
@@ -30,7 +30,7 @@
   <order>
     <hop>
       <from>build cypher</from>
-      <to>Remove</to>
+      <to>Copy</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -44,7 +44,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Remove</from>
+      <from>Copy</from>
       <to>done?</to>
       <enabled>Y</enabled>
     </hop>
@@ -76,7 +76,7 @@
     </GUI>
   </transform>
   <transform>
-    <name>Remove</name>
+    <name>Copy</name>
     <type>Neo4jCypherOutput</type>
     <description/>
     <distribute>Y</distribute>

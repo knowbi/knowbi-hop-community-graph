@@ -1,32 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <pipeline>
   <info>
     <name>drop all constraints</name>
+    <name_sync_with_filename>N</name_sync_with_filename>
     <description/>
     <extended_description/>
     <pipeline_version/>
     <pipeline_type>Normal</pipeline_type>
     <pipeline_status>0</pipeline_status>
-    <directory>/</directory>
     <parameters>
     </parameters>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <capture_transform_performance>N</capture_transform_performance>
     <transform_performance_capturing_delay>1000</transform_performance_capturing_delay>
     <transform_performance_capturing_size_limit>100</transform_performance_capturing_size_limit>
-    
-    
-    
-    
     <created_user>-</created_user>
     <created_date>2018/07/05 07:27:40.726</created_date>
     <modified_user>-</modified_user>
@@ -59,7 +45,6 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <compatible>N</compatible>
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>
       <jsScript>
@@ -81,12 +66,9 @@ var cypher = "DROP CONSTRAINT "+ name +";";
       </field>
     </fields>
     <attributes/>
-    <cluster_schema/>
-    
     <GUI>
       <xloc>656</xloc>
       <yloc>112</yloc>
-      <draw>Y</draw>
     </GUI>
   </transform>
   <transform>
@@ -130,12 +112,9 @@ var cypher = "DROP CONSTRAINT "+ name +";";
       </return>
     </returns>
     <attributes/>
-    <cluster_schema/>
-    
     <GUI>
       <xloc>160</xloc>
       <yloc>112</yloc>
-      <draw>Y</draw>
     </GUI>
   </transform>
   <transform>
@@ -163,17 +142,12 @@ var cypher = "DROP CONSTRAINT "+ name +";";
     <mappings/>
     <returns/>
     <attributes/>
-    <cluster_schema/>
-    
     <GUI>
       <xloc>1152</xloc>
       <yloc>112</yloc>
-      <draw>Y</draw>
     </GUI>
   </transform>
   <transform_error_handling>
   </transform_error_handling>
-  
-  
   <attributes/>
 </pipeline>
