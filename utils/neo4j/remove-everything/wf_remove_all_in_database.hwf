@@ -44,7 +44,7 @@
       <description/>
       <type>PIPELINE</type>
       <attributes/>
-      <filename>${PROJECT_HOME}/utils/neo4j/remove-everything/drop all constraints.hpl</filename>
+      <filename>${PROJECT_HOME}/utils/neo4j/remove-everything/pl_drop_all_constraints.hpl</filename>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
@@ -74,7 +74,7 @@
       <description/>
       <type>PIPELINE</type>
       <attributes/>
-      <filename>${PROJECT_HOME}/utils/neo4j/remove-everything/rename labels in blocks.hpl</filename>
+      <filename>${PROJECT_HOME}/utils/neo4j/remove-everything/pl_rename_labels_in_blocks.hpl</filename>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
@@ -109,7 +109,7 @@
       <description/>
       <type>PIPELINE</type>
       <attributes/>
-      <filename>${PROJECT_HOME}/utils/neo4j/remove-everything/drop all indexes.hpl</filename>
+      <filename>${PROJECT_HOME}/utils/neo4j/remove-everything/pl_drop_all_indexes.hpl</filename>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
@@ -139,7 +139,7 @@
       <description/>
       <type>PIPELINE</type>
       <attributes/>
-      <filename>${PROJECT_HOME}/utils/neo4j/remove-everything/remove all relationships.hpl</filename>
+      <filename>${PROJECT_HOME}/utils/neo4j/remove-everything/pl_remove_all_relationships.hpl</filename>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
