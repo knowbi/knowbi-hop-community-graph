@@ -19,7 +19,7 @@
       <type>WORKFLOW</type>
       <attributes/>
       <run_configuration>local</run_configuration>
-      <filename>${PROJECT_HOME}/utils/neo4j/remove-everything/remove all in database.hwf</filename>
+      <filename>${PROJECT_HOME}/utils/neo4j/remove-everything/wf_remove_all_in_database.hwf</filename>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
       <set_logfile>N</set_logfile>
