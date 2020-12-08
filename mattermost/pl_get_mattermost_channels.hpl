@@ -59,7 +59,7 @@
     </hop>
     <hop>
       <from>wait for :Channel</from>
-      <to>:TEAM_CHANNEL</to>
+      <to>:TEAM_HAS_CHANNEL</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -217,6 +217,64 @@
     <GUI>
       <xloc>896</xloc>
       <yloc>96</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>:TEAM_HAS_CHANNEL</name>
+    <type>Neo4JOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>lineage-graph</connection>
+    <batch_size>1000</batch_size>
+    <key/>
+    <create_indexes>N</create_indexes>
+    <use_create>N</use_create>
+    <only_create_relationships>Y</only_create_relationships>
+    <returning_graph>N</returning_graph>
+    <return_graph_field>graph</return_graph_field>
+    <from>
+      <read_only_from_node>N</read_only_from_node>
+      <labels>
+        <label/>
+        <value>Team</value>
+      </labels>
+      <properties>
+        <property>
+          <name>id</name>
+          <value>team_id</value>
+          <type>String</type>
+          <primary>Y</primary>
+        </property>
+      </properties>
+    </from>
+    <to>
+      <read_only_to_node>N</read_only_to_node>
+      <labels>
+        <label/>
+        <value>Channel</value>
+      </labels>
+      <properties>
+        <property>
+          <name>id</name>
+          <value>id</value>
+          <type>String</type>
+          <primary>Y</primary>
+        </property>
+      </properties>
+    </to>
+    <relationship/>
+    <relationship_value>TEAM_HAS_CHANNEL</relationship_value>
+    <relprops/>
+    <attributes/>
+    <GUI>
+      <xloc>896</xloc>
+      <yloc>208</yloc>
     </GUI>
   </transform>
   <transform>
@@ -418,6 +476,32 @@
     <GUI>
       <xloc>112</xloc>
       <yloc>96</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>keep channel, team id</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>id</name>
+      </field>
+      <field>
+        <name>team_id</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <GUI>
+      <xloc>496</xloc>
+      <yloc>208</yloc>
     </GUI>
   </transform>
   <transform>
@@ -717,34 +801,6 @@
     </GUI>
   </transform>
   <transform>
-    <name>keep channel, team id</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>id</name>
-        <rename/>
-      </field>
-      <field>
-        <name>team_id</name>
-        <rename/>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <GUI>
-      <xloc>496</xloc>
-      <yloc>208</yloc>
-    </GUI>
-  </transform>
-  <transform>
     <name>sort team, channel</name>
     <type>SortRows</type>
     <description/>
@@ -806,64 +862,6 @@
     <attributes/>
     <GUI>
       <xloc>736</xloc>
-      <yloc>208</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>:TEAM_CHANNEL</name>
-    <type>Neo4JOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>lineage-graph</connection>
-    <batch_size>1000</batch_size>
-    <key/>
-    <create_indexes>N</create_indexes>
-    <use_create>N</use_create>
-    <only_create_relationships>Y</only_create_relationships>
-    <returning_graph>N</returning_graph>
-    <return_graph_field>graph</return_graph_field>
-    <from>
-      <read_only_from_node>N</read_only_from_node>
-      <labels>
-        <label/>
-        <value>Team</value>
-      </labels>
-      <properties>
-        <property>
-          <name>id</name>
-          <value>team_id</value>
-          <type>String</type>
-          <primary>Y</primary>
-        </property>
-      </properties>
-    </from>
-    <to>
-      <read_only_to_node>N</read_only_to_node>
-      <labels>
-        <label/>
-        <value>Channel</value>
-      </labels>
-      <properties>
-        <property>
-          <name>id</name>
-          <value>id</value>
-          <type>String</type>
-          <primary>Y</primary>
-        </property>
-      </properties>
-    </to>
-    <relationship/>
-    <relationship_value>TEAM_CHANNEL</relationship_value>
-    <relprops/>
-    <attributes/>
-    <GUI>
-      <xloc>896</xloc>
       <yloc>208</yloc>
     </GUI>
   </transform>

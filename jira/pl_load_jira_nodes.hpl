@@ -24,11 +24,11 @@
   <order>
     <hop>
       <from>Generate rows</from>
-      <to>REST client</to>
+      <to>get JIRA issues</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>REST client</from>
+      <from>get JIRA issues</from>
       <to>get issues</to>
       <enabled>Y</enabled>
     </hop>
@@ -306,6 +306,18 @@
           <type>Integer</type>
           <primary>N</primary>
         </property>
+        <property>
+          <name>created</name>
+          <value>created</value>
+          <type>LocalDateTime</type>
+          <primary>N</primary>
+        </property>
+        <property>
+          <name>updated</name>
+          <value>updated</value>
+          <type>LocalDateTime</type>
+          <primary>N</primary>
+        </property>
       </properties>
     </from>
     <to>
@@ -377,6 +389,30 @@
     </GUI>
   </transform>
   <transform>
+    <name>Generate rows</name>
+    <type>RowGenerator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+    </fields>
+    <limit>1</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms>5000</interval_in_ms>
+    <row_time_field>now</row_time_field>
+    <last_time_field>FiveSecondsAgo</last_time_field>
+    <attributes/>
+    <GUI>
+      <xloc>156</xloc>
+      <yloc>156</yloc>
+    </GUI>
+  </transform>
+  <transform>
     <name>drop null ids</name>
     <type>FilterRows</type>
     <description/>
@@ -404,8 +440,8 @@
     </GUI>
   </transform>
   <transform>
-    <name>Generate rows</name>
-    <type>RowGenerator</type>
+    <name>get JIRA issues</name>
+    <type>Rest</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -414,16 +450,36 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <fields>
-    </fields>
-    <limit>1</limit>
-    <never_ending>N</never_ending>
-    <interval_in_ms>5000</interval_in_ms>
-    <row_time_field>now</row_time_field>
-    <last_time_field>FiveSecondsAgo</last_time_field>
+    <applicationType>JSON</applicationType>
+    <method>GET</method>
+    <url>https://issues.apache.org/jira/rest/api/2/search/?jql=project=HOP&amp;maxResults=10000</url>
+    <urlInField>N</urlInField>
+    <dynamicMethod>N</dynamicMethod>
+    <methodFieldName/>
+    <urlField/>
+    <bodyField/>
+    <httpLogin/>
+    <httpPassword>Encrypted </httpPassword>
+    <proxyHost/>
+    <proxyPort/>
+    <preemptive>N</preemptive>
+    <trustStoreFile/>
+    <trustStorePassword>Encrypted </trustStorePassword>
+    <headers>
+      </headers>
+    <parameters>
+      </parameters>
+    <matrixParameters>
+      </matrixParameters>
+    <result>
+      <name>result</name>
+      <code>http_status</code>
+      <response_time/>
+      <response_header/>
+    </result>
     <attributes/>
     <GUI>
-      <xloc>156</xloc>
+      <xloc>298</xloc>
       <yloc>156</yloc>
     </GUI>
   </transform>
@@ -490,50 +546,6 @@
     </GUI>
   </transform>
   <transform>
-    <name>REST client</name>
-    <type>Rest</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <applicationType>JSON</applicationType>
-    <method>GET</method>
-    <url>https://issues.apache.org/jira/rest/api/2/search/?jql=project=HOP&amp;maxResults=10000</url>
-    <urlInField>N</urlInField>
-    <dynamicMethod>N</dynamicMethod>
-    <methodFieldName/>
-    <urlField/>
-    <bodyField/>
-    <httpLogin/>
-    <httpPassword>Encrypted </httpPassword>
-    <proxyHost/>
-    <proxyPort/>
-    <preemptive>N</preemptive>
-    <trustStoreFile/>
-    <trustStorePassword>Encrypted </trustStorePassword>
-    <headers>
-      </headers>
-    <parameters>
-      </parameters>
-    <matrixParameters>
-      </matrixParameters>
-    <result>
-      <name>result</name>
-      <code>http_status</code>
-      <response_time/>
-      <response_header/>
-    </result>
-    <attributes/>
-    <GUI>
-      <xloc>298</xloc>
-      <yloc>156</yloc>
-    </GUI>
-  </transform>
-  <transform>
     <name>keep issue, component</name>
     <type>SelectValues</type>
     <description/>
@@ -547,15 +559,12 @@
     <fields>
       <field>
         <name>selfUrl</name>
-        <rename/>
       </field>
       <field>
         <name>id</name>
-        <rename/>
       </field>
       <field>
         <name>name</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -563,34 +572,6 @@
     <GUI>
       <xloc>1008</xloc>
       <yloc>156</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>keep status</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>statusId</name>
-        <rename/>
-      </field>
-      <field>
-        <name>statusName</name>
-        <rename/>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <GUI>
-      <xloc>1008</xloc>
-      <yloc>272</yloc>
     </GUI>
   </transform>
   <transform>
@@ -607,11 +588,9 @@
     <fields>
       <field>
         <name>key</name>
-        <rename/>
       </field>
       <field>
         <name>statusId</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -642,6 +621,32 @@
     <GUI>
       <xloc>582</xloc>
       <yloc>156</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>keep status</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>statusId</name>
+      </field>
+      <field>
+        <name>statusName</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <GUI>
+      <xloc>1008</xloc>
+      <yloc>272</yloc>
     </GUI>
   </transform>
   <transform>
@@ -1018,6 +1023,32 @@
         <path>$.fields.votes.votes</path>
         <type>Integer</type>
         <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>created</name>
+        <path>$.fields.created</path>
+        <type>Timestamp</type>
+        <format>yyyy-MM-dd'T'HH:mm:ss.SSSZ</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>updated</name>
+        <path>$.fields.updated</path>
+        <type>Timestamp</type>
+        <format>yyyy-MM-dd'T'HH:mm:ss.SSSZ</format>
         <currency/>
         <decimal/>
         <group/>

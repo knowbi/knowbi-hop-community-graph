@@ -24,12 +24,12 @@
   <order>
     <hop>
       <from>get posts, issues</from>
-      <to>:JIRA_IN_POST</to>
+      <to>:POST_HAS_ISSUE</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <transform>
-    <name>:JIRA_IN_POST</name>
+    <name>:POST_HAS_ISSUE</name>
     <type>Neo4JOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -51,21 +51,6 @@
       <read_only_from_node>N</read_only_from_node>
       <labels>
         <label/>
-        <value>Issue</value>
-      </labels>
-      <properties>
-        <property>
-          <name>key</name>
-          <value>i.key</value>
-          <type>String</type>
-          <primary>Y</primary>
-        </property>
-      </properties>
-    </from>
-    <to>
-      <read_only_to_node>N</read_only_to_node>
-      <labels>
-        <label/>
         <value>Post</value>
       </labels>
       <properties>
@@ -76,9 +61,24 @@
           <primary>Y</primary>
         </property>
       </properties>
+    </from>
+    <to>
+      <read_only_to_node>N</read_only_to_node>
+      <labels>
+        <label/>
+        <value>Issue</value>
+      </labels>
+      <properties>
+        <property>
+          <name>key</name>
+          <value>i.key</value>
+          <type>String</type>
+          <primary>Y</primary>
+        </property>
+      </properties>
     </to>
     <relationship/>
-    <relationship_value>JIRA_IN_POST</relationship_value>
+    <relationship_value>POST_HAS_ISSUE</relationship_value>
     <relprops/>
     <attributes/>
     <GUI>

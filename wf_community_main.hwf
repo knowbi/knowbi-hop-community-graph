@@ -39,7 +39,7 @@
       <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>227</xloc>
+      <xloc>224</xloc>
       <yloc>112</yloc>
       <attributes_hac/>
     </action>

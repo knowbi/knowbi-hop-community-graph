@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pipeline>
   <info>
-    <name>pl_create_post_follows_relationship</name>
+    <name>pl_get_mattermost_post_relationships</name>
     <name_sync_with_filename>Y</name_sync_with_filename>
     <description/>
     <extended_description/>
@@ -39,7 +39,7 @@
     </hop>
     <hop>
       <from>users LU</from>
-      <to>:USER_POST</to>
+      <to>:USER_HAS_POST</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -49,10 +49,160 @@
     </hop>
     <hop>
       <from>channels LU</from>
-      <to>CHANNEL_POST</to>
+      <to>:CHANNEL_POST</to>
       <enabled>Y</enabled>
     </hop>
   </order>
+  <transform>
+    <name>:CHANNEL_POST</name>
+    <type>Neo4JOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>lineage-graph</connection>
+    <batch_size>1000</batch_size>
+    <key/>
+    <create_indexes>N</create_indexes>
+    <use_create>N</use_create>
+    <only_create_relationships>Y</only_create_relationships>
+    <returning_graph>N</returning_graph>
+    <return_graph_field>graph</return_graph_field>
+    <from>
+      <read_only_from_node>N</read_only_from_node>
+      <labels>
+        <label/>
+        <value>Channel</value>
+      </labels>
+      <properties>
+        <property>
+          <name>id</name>
+          <value>c.id</value>
+          <type>String</type>
+          <primary>Y</primary>
+        </property>
+      </properties>
+    </from>
+    <to>
+      <read_only_to_node>N</read_only_to_node>
+      <labels>
+        <label/>
+        <value>Post</value>
+      </labels>
+      <properties>
+        <property>
+          <name>id</name>
+          <value>n.id</value>
+          <type>String</type>
+          <primary>Y</primary>
+        </property>
+      </properties>
+    </to>
+    <relationship/>
+    <relationship_value>CHANNEL_HAS_POST</relationship_value>
+    <relprops/>
+    <attributes/>
+    <GUI>
+      <xloc>368</xloc>
+      <yloc>224</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>:USER_HAS_POST</name>
+    <type>Neo4JOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>lineage-graph</connection>
+    <batch_size>1000</batch_size>
+    <key/>
+    <create_indexes>N</create_indexes>
+    <use_create>N</use_create>
+    <only_create_relationships>Y</only_create_relationships>
+    <returning_graph>N</returning_graph>
+    <return_graph_field>graph</return_graph_field>
+    <from>
+      <read_only_from_node>N</read_only_from_node>
+      <labels>
+        <label/>
+        <value>Post</value>
+      </labels>
+      <properties>
+        <property>
+          <name>id</name>
+          <value>n.id</value>
+          <type>String</type>
+          <primary>Y</primary>
+        </property>
+      </properties>
+    </from>
+    <to>
+      <read_only_to_node>N</read_only_to_node>
+      <labels>
+        <label/>
+        <value>User</value>
+      </labels>
+      <properties>
+        <property>
+          <name>id</name>
+          <value>u.id</value>
+          <type>String</type>
+          <primary>Y</primary>
+        </property>
+      </properties>
+    </to>
+    <relationship/>
+    <relationship_value>USER_HAS_POST</relationship_value>
+    <relprops/>
+    <attributes/>
+    <GUI>
+      <xloc>368</xloc>
+      <yloc>112</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>channels LU</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>get channels</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>n.channel</name>
+        <field>c.displayName</field>
+      </key>
+      <value>
+        <name>c.id</name>
+        <rename>c.id</rename>
+        <default/>
+        <type>String</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <GUI>
+      <xloc>240</xloc>
+      <yloc>224</yloc>
+    </GUI>
+  </transform>
   <transform>
     <name>get channels</name>
     <type>Neo4jCypherOutput</type>
@@ -92,47 +242,6 @@
     <GUI>
       <xloc>240</xloc>
       <yloc>336</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>get users</name>
-    <type>Neo4jCypherOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>lineage-graph</connection>
-    <cypher>match (u:User) return u.id, u.username</cypher>
-    <batch_size/>
-    <read_only>N</read_only>
-    <retry>Y</retry>
-    <cypher_from_field>N</cypher_from_field>
-    <cypher_field/>
-    <unwind>N</unwind>
-    <unwind_map/>
-    <returning_graph>N</returning_graph>
-    <return_graph_field/>
-    <mappings/>
-    <returns>
-      <return>
-        <name>u.id</name>
-        <type>String</type>
-        <source_type>String</source_type>
-      </return>
-      <return>
-        <name>u.username</name>
-        <type>String</type>
-        <source_type>String</source_type>
-      </return>
-    </returns>
-    <attributes/>
-    <GUI>
-      <xloc>240</xloc>
-      <yloc>16</yloc>
     </GUI>
   </transform>
   <transform>
@@ -182,8 +291,8 @@
     </GUI>
   </transform>
   <transform>
-    <name>channels LU</name>
-    <type>StreamLookup</type>
+    <name>get users</name>
+    <type>Neo4jCypherOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -192,27 +301,34 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>get channels</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>n.channel</name>
-        <field>c.displayName</field>
-      </key>
-      <value>
-        <name>c.id</name>
-        <rename>c.id</rename>
-        <default/>
+    <connection>lineage-graph</connection>
+    <cypher>match (u:User) return u.id, u.username</cypher>
+    <batch_size/>
+    <read_only>N</read_only>
+    <retry>Y</retry>
+    <cypher_from_field>N</cypher_from_field>
+    <cypher_field/>
+    <unwind>N</unwind>
+    <unwind_map/>
+    <returning_graph>N</returning_graph>
+    <return_graph_field/>
+    <mappings/>
+    <returns>
+      <return>
+        <name>u.id</name>
         <type>String</type>
-      </value>
-    </lookup>
+        <source_type>String</source_type>
+      </return>
+      <return>
+        <name>u.username</name>
+        <type>String</type>
+        <source_type>String</source_type>
+      </return>
+    </returns>
     <attributes/>
     <GUI>
       <xloc>240</xloc>
-      <yloc>224</yloc>
+      <yloc>16</yloc>
     </GUI>
   </transform>
   <transform>
@@ -247,122 +363,6 @@
     <GUI>
       <xloc>240</xloc>
       <yloc>112</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>:USER_POST</name>
-    <type>Neo4JOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>lineage-graph</connection>
-    <batch_size>1000</batch_size>
-    <key/>
-    <create_indexes>N</create_indexes>
-    <use_create>N</use_create>
-    <only_create_relationships>Y</only_create_relationships>
-    <returning_graph>N</returning_graph>
-    <return_graph_field>graph</return_graph_field>
-    <from>
-      <read_only_from_node>N</read_only_from_node>
-      <labels>
-        <label/>
-        <value>Post</value>
-      </labels>
-      <properties>
-        <property>
-          <name>id</name>
-          <value>n.id</value>
-          <type>String</type>
-          <primary>Y</primary>
-        </property>
-      </properties>
-    </from>
-    <to>
-      <read_only_to_node>N</read_only_to_node>
-      <labels>
-        <label/>
-        <value>User</value>
-      </labels>
-      <properties>
-        <property>
-          <name>id</name>
-          <value>u.id</value>
-          <type>String</type>
-          <primary>Y</primary>
-        </property>
-      </properties>
-    </to>
-    <relationship/>
-    <relationship_value>USER_POST</relationship_value>
-    <relprops/>
-    <attributes/>
-    <GUI>
-      <xloc>368</xloc>
-      <yloc>112</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>CHANNEL_POST</name>
-    <type>Neo4JOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>lineage-graph</connection>
-    <batch_size>1000</batch_size>
-    <key/>
-    <create_indexes>N</create_indexes>
-    <use_create>N</use_create>
-    <only_create_relationships>Y</only_create_relationships>
-    <returning_graph>N</returning_graph>
-    <return_graph_field>graph</return_graph_field>
-    <from>
-      <read_only_from_node>N</read_only_from_node>
-      <labels>
-        <label/>
-        <value>Post</value>
-      </labels>
-      <properties>
-        <property>
-          <name>id</name>
-          <value>n.id</value>
-          <type>String</type>
-          <primary>Y</primary>
-        </property>
-      </properties>
-    </from>
-    <to>
-      <read_only_to_node>N</read_only_to_node>
-      <labels>
-        <label/>
-        <value>Channel</value>
-      </labels>
-      <properties>
-        <property>
-          <name>id</name>
-          <value>c.id</value>
-          <type>String</type>
-          <primary>Y</primary>
-        </property>
-      </properties>
-    </to>
-    <relationship/>
-    <relationship_value>CHANNEL_POST</relationship_value>
-    <relprops/>
-    <attributes/>
-    <GUI>
-      <xloc>368</xloc>
-      <yloc>224</yloc>
     </GUI>
   </transform>
   <transform_error_handling>
