@@ -82,7 +82,7 @@
     <relprops/>
     <attributes/>
     <GUI>
-      <xloc>336</xloc>
+      <xloc>368</xloc>
       <yloc>144</yloc>
     </GUI>
   </transform>
@@ -123,7 +123,7 @@
     </returns>
     <attributes/>
     <GUI>
-      <xloc>161</xloc>
+      <xloc>192</xloc>
       <yloc>144</yloc>
     </GUI>
   </transform>
