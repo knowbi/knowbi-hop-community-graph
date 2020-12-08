@@ -165,7 +165,7 @@
     <attributes/>
     <GUI>
       <xloc>1568</xloc>
-      <yloc>156</yloc>
+      <yloc>112</yloc>
     </GUI>
   </transform>
   <transform>
@@ -223,7 +223,7 @@
     <attributes/>
     <GUI>
       <xloc>1568</xloc>
-      <yloc>416</yloc>
+      <yloc>384</yloc>
     </GUI>
   </transform>
   <transform>
@@ -330,8 +330,8 @@
     <relprops/>
     <attributes/>
     <GUI>
-      <xloc>866</xloc>
-      <yloc>416</yloc>
+      <xloc>864</xloc>
+      <yloc>384</yloc>
     </GUI>
   </transform>
   <transform>
@@ -385,7 +385,7 @@
     <attributes/>
     <GUI>
       <xloc>1568</xloc>
-      <yloc>272</yloc>
+      <yloc>240</yloc>
     </GUI>
   </transform>
   <transform>
@@ -408,8 +408,8 @@
     <last_time_field>FiveSecondsAgo</last_time_field>
     <attributes/>
     <GUI>
-      <xloc>156</xloc>
-      <yloc>156</yloc>
+      <xloc>144</xloc>
+      <yloc>112</yloc>
     </GUI>
   </transform>
   <transform>
@@ -435,8 +435,8 @@
     </compare>
     <attributes/>
     <GUI>
-      <xloc>1150</xloc>
-      <yloc>156</yloc>
+      <xloc>1136</xloc>
+      <yloc>112</yloc>
     </GUI>
   </transform>
   <transform>
@@ -479,8 +479,8 @@
     </result>
     <attributes/>
     <GUI>
-      <xloc>298</xloc>
-      <yloc>156</yloc>
+      <xloc>288</xloc>
+      <yloc>112</yloc>
     </GUI>
   </transform>
   <transform>
@@ -541,8 +541,8 @@
     <sizeFieldName/>
     <attributes/>
     <GUI>
-      <xloc>440</xloc>
-      <yloc>156</yloc>
+      <xloc>432</xloc>
+      <yloc>112</yloc>
     </GUI>
   </transform>
   <transform>
@@ -571,7 +571,7 @@
     <attributes/>
     <GUI>
       <xloc>1008</xloc>
-      <yloc>156</yloc>
+      <yloc>112</yloc>
     </GUI>
   </transform>
   <transform>
@@ -597,7 +597,7 @@
     <attributes/>
     <GUI>
       <xloc>1008</xloc>
-      <yloc>416</yloc>
+      <yloc>384</yloc>
     </GUI>
   </transform>
   <transform>
@@ -619,8 +619,8 @@
     </fields>
     <attributes/>
     <GUI>
-      <xloc>582</xloc>
-      <yloc>156</yloc>
+      <xloc>576</xloc>
+      <yloc>112</yloc>
     </GUI>
   </transform>
   <transform>
@@ -646,7 +646,7 @@
     <attributes/>
     <GUI>
       <xloc>1008</xloc>
-      <yloc>272</yloc>
+      <yloc>240</yloc>
     </GUI>
   </transform>
   <transform>
@@ -733,8 +733,8 @@
     <sizeFieldName/>
     <attributes/>
     <GUI>
-      <xloc>866</xloc>
-      <yloc>156</yloc>
+      <xloc>864</xloc>
+      <yloc>112</yloc>
     </GUI>
   </transform>
   <transform>
@@ -783,8 +783,8 @@
     </fields>
     <attributes/>
     <GUI>
-      <xloc>1292</xloc>
-      <yloc>156</yloc>
+      <xloc>1280</xloc>
+      <yloc>112</yloc>
     </GUI>
   </transform>
   <transform>
@@ -826,7 +826,7 @@
     <attributes/>
     <GUI>
       <xloc>1296</xloc>
-      <yloc>416</yloc>
+      <yloc>384</yloc>
     </GUI>
   </transform>
   <transform>
@@ -868,7 +868,7 @@
     <attributes/>
     <GUI>
       <xloc>1296</xloc>
-      <yloc>272</yloc>
+      <yloc>240</yloc>
     </GUI>
   </transform>
   <transform>
@@ -1072,8 +1072,8 @@
     <sizeFieldName/>
     <attributes/>
     <GUI>
-      <xloc>724</xloc>
-      <yloc>156</yloc>
+      <xloc>720</xloc>
+      <yloc>112</yloc>
     </GUI>
   </transform>
   <transform>
@@ -1096,7 +1096,7 @@
     <attributes/>
     <GUI>
       <xloc>1440</xloc>
-      <yloc>416</yloc>
+      <yloc>384</yloc>
     </GUI>
   </transform>
   <transform_error_handling>
