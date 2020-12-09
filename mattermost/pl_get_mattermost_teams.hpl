@@ -39,6 +39,11 @@
     </hop>
     <hop>
       <from>epoch -> date</from>
+      <to>get sysdate</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get sysdate</from>
       <to>:Team</to>
       <enabled>Y</enabled>
     </hop>
@@ -165,6 +170,12 @@
           <type>String</type>
           <primary>N</primary>
         </property>
+        <property>
+          <name>processedDate</name>
+          <value>sysdate</value>
+          <type>LocalDateTime</type>
+          <primary>N</primary>
+        </property>
       </properties>
     </from>
     <to>
@@ -177,7 +188,7 @@
     <relprops/>
     <attributes/>
     <GUI>
-      <xloc>592</xloc>
+      <xloc>704</xloc>
       <yloc>96</yloc>
     </GUI>
   </transform>
@@ -585,6 +596,29 @@
     <attributes/>
     <GUI>
       <xloc>352</xloc>
+      <yloc>96</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>get sysdate</name>
+    <type>SystemInfo</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>sysdate</name>
+        <type>system date (variable)</type>
+      </field>
+    </fields>
+    <attributes/>
+    <GUI>
+      <xloc>592</xloc>
       <yloc>96</yloc>
     </GUI>
   </transform>

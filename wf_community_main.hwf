@@ -161,7 +161,24 @@
       <attributes/>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>751</xloc>
+      <xloc>880</xloc>
+      <yloc>112</yloc>
+      <attributes_hac/>
+    </action>
+    <action>
+      <name>finalize</name>
+      <description/>
+      <type>NEO4J_CYPHER_SCRIPT</type>
+      <attributes/>
+      <connection>lineage-graph</connection>
+      <script>match ()-[r]->() 
+match (s)-[r]->(e) 
+with s,e,type(r) as typ, tail(collect(r)) as coll 
+foreach(x in coll | delete x)</script>
+      <replace_variables>N</replace_variables>
+      <parallel>N</parallel>
+      <nr>0</nr>
+      <xloc>752</xloc>
       <yloc>112</yloc>
       <attributes_hac/>
     </action>
@@ -205,6 +222,15 @@
     </hop>
     <hop>
       <from>JIRA - MM relationships</from>
+      <to>finalize</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>finalize</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>

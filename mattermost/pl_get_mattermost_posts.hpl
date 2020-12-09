@@ -129,6 +129,11 @@
     </hop>
     <hop>
       <from>no null Ids</from>
+      <to>get sysdate</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get sysdate</from>
       <to>:Post</to>
       <enabled>Y</enabled>
     </hop>
@@ -187,7 +192,7 @@
     <relprops/>
     <attributes/>
     <GUI>
-      <xloc>1760</xloc>
+      <xloc>1872</xloc>
       <yloc>336</yloc>
     </GUI>
   </transform>
@@ -325,6 +330,12 @@
           <type>String</type>
           <primary>N</primary>
         </property>
+        <property>
+          <name>processedDate</name>
+          <value>sysdate</value>
+          <type>LocalDateTime</type>
+          <primary>N</primary>
+        </property>
       </properties>
     </from>
     <to>
@@ -337,7 +348,7 @@
     <relprops/>
     <attributes/>
     <GUI>
-      <xloc>1760</xloc>
+      <xloc>1872</xloc>
       <yloc>80</yloc>
     </GUI>
   </transform>
@@ -1170,7 +1181,7 @@ return c.id, c.displayName</cypher>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <send_true_to>:Post</send_true_to>
+    <send_true_to>get sysdate</send_true_to>
     <send_false_to>Text file output</send_false_to>
     <compare>
       <condition>
@@ -1713,6 +1724,29 @@ return c.id, c.displayName</cypher>
     <GUI>
       <xloc>1536</xloc>
       <yloc>336</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>get sysdate</name>
+    <type>SystemInfo</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>sysdate</name>
+        <type>system date (variable)</type>
+      </field>
+    </fields>
+    <attributes/>
+    <GUI>
+      <xloc>1776</xloc>
+      <yloc>80</yloc>
     </GUI>
   </transform>
   <transform_error_handling>

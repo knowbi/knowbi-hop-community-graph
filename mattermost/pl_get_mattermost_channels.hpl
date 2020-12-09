@@ -38,11 +38,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>epoch -> date</from>
-      <to>:Channel</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>parse channels</from>
       <to>keep channel, team id</to>
       <enabled>Y</enabled>
@@ -60,6 +55,16 @@
     <hop>
       <from>wait for :Channel</from>
       <to>:TEAM_HAS_CHANNEL</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>epoch -> date</from>
+      <to>get sysdate</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get sysdate</from>
+      <to>:Channel</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -201,6 +206,12 @@
           <name>teamUpdateAt</name>
           <value>team_update_at</value>
           <type>String</type>
+          <primary>N</primary>
+        </property>
+        <property>
+          <name>processedDate</name>
+          <value>sysdate</value>
+          <type>LocalDateTime</type>
           <primary>N</primary>
         </property>
       </properties>
@@ -863,6 +874,29 @@
     <GUI>
       <xloc>736</xloc>
       <yloc>208</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>get sysdate</name>
+    <type>SystemInfo</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>sysdate</name>
+        <type>system date (variable)</type>
+      </field>
+    </fields>
+    <attributes/>
+    <GUI>
+      <xloc>624</xloc>
+      <yloc>96</yloc>
     </GUI>
   </transform>
   <transform_error_handling>
