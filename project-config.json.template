@@ -1,0 +1,39 @@
+{
+  "metadataBaseFolder" : "${PROJECT_HOME}/metadata",
+  "unitTestsBasePath" : "${PROJECT_HOME}",
+  "dataSetsCsvFolder" : "${PROJECT_HOME}/datasets",
+  "enforcingExecutionInHome" : true,
+  "config" : {
+    "variables" : [ {
+      "name" : "login_id",
+      "value" : "<<YOUR MATTERMOST USERNAME>>"
+    }, {
+      "name" : "password",
+      "value" : "<<YOUR MATTERMOST PASSWORD>>"
+    }, {
+      "name" : "mattermost_url",
+      "value" : "https://chat.project-hop.org"
+    }, {
+      "name" : "NEO4J_DB_HOST",
+      "value" : ""
+    }, {
+      "name" : "NEO4J_DB_NAME",
+      "value" : "neo4j"
+    }, {
+      "name" : "NEO4J_BOLT_PORT",
+      "value" : "7687"
+    }, {
+      "name" : "NEO4J_BROWSER_PORT",
+      "value" : "7474"
+    }, {
+      "name" : "NEO4J_USER",
+      "value" : "neo4j"
+    }, {
+      "name" : "NEO4J_PASS",
+      "value" : ""
+    }, {
+      "name" : "NEO4J_LOGGING_CONNECTION",
+      "value" : "lineage-graph"
+    } ]
+  }
+}
