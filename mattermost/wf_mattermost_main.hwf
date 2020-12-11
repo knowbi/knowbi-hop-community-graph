@@ -30,8 +30,8 @@
       <DayOfMonth>1</DayOfMonth>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>80</xloc>
-      <yloc>64</yloc>
+      <xloc>128</xloc>
+      <yloc>48</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -60,8 +60,8 @@
       </parameters>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>197</xloc>
-      <yloc>64</yloc>
+      <xloc>128</xloc>
+      <yloc>141</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -90,8 +90,8 @@
       </parameters>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>431</xloc>
-      <yloc>64</yloc>
+      <xloc>128</xloc>
+      <yloc>327</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -120,8 +120,8 @@
       </parameters>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>548</xloc>
-      <yloc>64</yloc>
+      <xloc>128</xloc>
+      <yloc>420</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -150,8 +150,8 @@
       </parameters>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>314</xloc>
-      <yloc>64</yloc>
+      <xloc>128</xloc>
+      <yloc>234</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -180,8 +180,8 @@
       </parameters>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>665</xloc>
-      <yloc>64</yloc>
+      <xloc>128</xloc>
+      <yloc>513</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -210,8 +210,19 @@
       </parameters>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>782</xloc>
-      <yloc>64</yloc>
+      <xloc>128</xloc>
+      <yloc>606</yloc>
+      <attributes_hac/>
+    </action>
+    <action>
+      <name>Success</name>
+      <description/>
+      <type>SUCCESS</type>
+      <attributes/>
+      <parallel>N</parallel>
+      <nr>0</nr>
+      <xloc>128</xloc>
+      <yloc>699</yloc>
       <attributes_hac/>
     </action>
   </actions>
@@ -269,6 +280,15 @@
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>create post relationships</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
     </hop>
   </hops>
   <notepads>

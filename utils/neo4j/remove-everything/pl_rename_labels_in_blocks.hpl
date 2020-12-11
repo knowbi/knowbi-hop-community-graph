@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pipeline>
   <info>
-    <name>rename labels in blocks</name>
+    <name>remove labels in blocks</name>
     <name_sync_with_filename>N</name_sync_with_filename>
     <description/>
     <extended_description/>
@@ -130,7 +130,7 @@
         <jsScript_script>
 //var copyLabel = "Customer"+copyNr;
 
-var cypherCopy = "MATCH (n) WITH n LIMIT 100000 DELETE n RETURN count(n) as nodeCount;";
+var cypherCopy = "MATCH (n) WITH n LIMIT 100000 DETACH DELETE n RETURN count(n) as nodeCount;";
 
 
 </jsScript_script>

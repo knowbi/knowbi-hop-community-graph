@@ -35,8 +35,8 @@
       <DayOfMonth>1</DayOfMonth>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>240</xloc>
-      <yloc>96</yloc>
+      <xloc>160</xloc>
+      <yloc>80</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -65,8 +65,8 @@
       </parameters>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>240</xloc>
-      <yloc>224</yloc>
+      <xloc>160</xloc>
+      <yloc>272</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -100,8 +100,8 @@
       </parameters>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>240</xloc>
-      <yloc>640</yloc>
+      <xloc>160</xloc>
+      <yloc>560</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -130,7 +130,7 @@
       </parameters>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>240</xloc>
+      <xloc>160</xloc>
       <yloc>368</yloc>
       <attributes_hac/>
     </action>
@@ -165,8 +165,61 @@
       </parameters>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>240</xloc>
-      <yloc>504</yloc>
+      <xloc>160</xloc>
+      <yloc>464</yloc>
+      <attributes_hac/>
+    </action>
+    <action>
+      <name>unset ${NEO4J_LOGGING_CONNECTION}</name>
+      <description/>
+      <type>SET_VARIABLES</type>
+      <attributes/>
+      <replacevars>Y</replacevars>
+      <filename/>
+      <file_variable_type>JVM</file_variable_type>
+      <fields>
+        <field>
+          <variable_name>NEO4J_LOGGING_CONNECTION</variable_name>
+          <variable_value/>
+          <variable_type>JVM</variable_type>
+        </field>
+      </fields>
+      <parallel>N</parallel>
+      <nr>0</nr>
+      <xloc>160</xloc>
+      <yloc>176</yloc>
+      <attributes_hac/>
+    </action>
+    <action>
+      <name>Set ${NEO4J_LOGGING_CONNECTION}</name>
+      <description/>
+      <type>SET_VARIABLES</type>
+      <attributes/>
+      <replacevars>Y</replacevars>
+      <filename/>
+      <file_variable_type>JVM</file_variable_type>
+      <fields>
+        <field>
+          <variable_name>NEO4J_LOGGING_CONNECTION</variable_name>
+          <variable_value>lineage-graph</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+      </fields>
+      <parallel>N</parallel>
+      <nr>0</nr>
+      <xloc>160</xloc>
+      <yloc>656</yloc>
+      <attributes_hac/>
+    </action>
+    <action>
+      <name>Success</name>
+      <description/>
+      <type>SUCCESS</type>
+      <attributes/>
+      <parallel>N</parallel>
+      <nr>0</nr>
+      <xloc>160</xloc>
+      <yloc>752</yloc>
       <attributes_hac/>
     </action>
   </actions>
@@ -185,7 +238,7 @@
       <to>remove all relationships</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -194,18 +247,45 @@
       <to>remove all nodes</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>START</from>
-      <to>drop all constraints</to>
+      <to>unset ${NEO4J_LOGGING_CONNECTION}</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>unset ${NEO4J_LOGGING_CONNECTION}</from>
+      <to>drop all constraints</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>remove all nodes</from>
+      <to>Set ${NEO4J_LOGGING_CONNECTION}</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Set ${NEO4J_LOGGING_CONNECTION}</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
     </hop>
   </hops>
   <notepads>

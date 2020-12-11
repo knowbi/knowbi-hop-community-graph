@@ -1,2 +1,3 @@
 metadata/
+!metadata/neo4j-connection/lineage-graph.json
 project-config.json

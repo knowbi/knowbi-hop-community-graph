@@ -39,8 +39,8 @@
       <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>224</xloc>
-      <yloc>112</yloc>
+      <xloc>208</xloc>
+      <yloc>173</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -69,8 +69,8 @@
       <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>358</xloc>
-      <yloc>112</yloc>
+      <xloc>208</xloc>
+      <yloc>298</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -90,8 +90,8 @@
       <DayOfMonth>1</DayOfMonth>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>96</xloc>
-      <yloc>112</yloc>
+      <xloc>208</xloc>
+      <yloc>48</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -120,8 +120,8 @@
       <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>489</xloc>
-      <yloc>112</yloc>
+      <xloc>208</xloc>
+      <yloc>423</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -150,8 +150,8 @@
       </parameters>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>620</xloc>
-      <yloc>112</yloc>
+      <xloc>208</xloc>
+      <yloc>548</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -161,8 +161,8 @@
       <attributes/>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>880</xloc>
-      <yloc>112</yloc>
+      <xloc>208</xloc>
+      <yloc>798</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -178,8 +178,8 @@ foreach(x in coll | delete x)</script>
       <replace_variables>N</replace_variables>
       <parallel>N</parallel>
       <nr>0</nr>
-      <xloc>752</xloc>
-      <yloc>112</yloc>
+      <xloc>208</xloc>
+      <yloc>673</yloc>
       <attributes_hac/>
     </action>
   </actions>

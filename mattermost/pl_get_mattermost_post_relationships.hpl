@@ -134,12 +134,12 @@
       <read_only_from_node>N</read_only_from_node>
       <labels>
         <label/>
-        <value>Post</value>
+        <value>User</value>
       </labels>
       <properties>
         <property>
           <name>id</name>
-          <value>n.id</value>
+          <value>u.id</value>
           <type>String</type>
           <primary>Y</primary>
         </property>
@@ -149,12 +149,12 @@
       <read_only_to_node>N</read_only_to_node>
       <labels>
         <label/>
-        <value>User</value>
+        <value>Post</value>
       </labels>
       <properties>
         <property>
           <name>id</name>
-          <value>u.id</value>
+          <value>n.id</value>
           <type>String</type>
           <primary>Y</primary>
         </property>
