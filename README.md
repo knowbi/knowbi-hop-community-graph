@@ -31,7 +31,7 @@ Clone the repository:
 
 <code>git clone https://github.com/knowbi/knowbi-hop-community.git</code>
 
-Copy <code>project-config.json.template</code> to <code>project-config.json</code> and change the variables (in the file or through Hop Gui): 
+Copy `project-config.json.template` to `project-config.json` and change the variables (in the file or through Hop Gui): 
 
 * login_id: your mattermost login id 
 * password: your mattermost password
@@ -42,3 +42,7 @@ Copy <code>project-config.json.template</code> to <code>project-config.json</cod
 * NEO4J_BROWSER_PORT: (default: 7474)
 * NEO4J_USER: (default: neo4j)  
 * NEO4J_PASS: your Neo4j password
+
+The ASF's JIRA for Hop is publicly available, no authentication is required. 
+
+Run `wf_community_main.hwf` to load the Hop community graph to your local Neo4j database. 
