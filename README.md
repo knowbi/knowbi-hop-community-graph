@@ -27,7 +27,11 @@ TODO:
 
 # Loading the Hop community data to your Neo4j database 
 
-Clone the repository: 
+[Download](https://hop.apache.org/download/download/) a recent Apache Hop release build and unzip   
+
+[Download](https://github.com/mattcasters/hop-neo4j/releases) the Neo4j Hop plugins, unzip to `hop/plugins/transforms`
+
+Clone this repository: 
 
 <code>git clone https://github.com/knowbi/knowbi-hop-community.git</code>
 
