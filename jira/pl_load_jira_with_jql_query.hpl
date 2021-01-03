@@ -121,7 +121,11 @@ Still pretty much a quick and dirty hack. </note>
       <schema_name/>
     </partitioning>
     <separator>|</separator>
+<<<<<<< HEAD
+    <enclosure>"</enclosure>
+=======
     <enclosure/>
+>>>>>>> fb6edc92f94bdc4cee6a867c8a3b73571bc663ab
     <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
     <header>Y</header>
@@ -452,7 +456,11 @@ var nov = new Date(2020, 10, 01, 0, 0, 0, 0); </jsScript_script>
         <currency/>
         <decimal/>
         <group/>
+<<<<<<< HEAD
+        <nullif>project = HOP AND resolution in (Fixed, "Won't Fix", Duplicate, "Cannot Reproduce", Implemented, Done, Resolved, "Not A Bug") AND "Last public comment date" >= -30d ORDER BY priority DESC, updated DESC</nullif>
+=======
         <nullif/>
+>>>>>>> fb6edc92f94bdc4cee6a867c8a3b73571bc663ab
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -482,7 +490,11 @@ var nov = new Date(2020, 10, 01, 0, 0, 0, 0); </jsScript_script>
     </partitioning>
     <applicationType>JSON</applicationType>
     <method>GET</method>
+<<<<<<< HEAD
+    <url>https://issues.apache.org/jira/rest/api/2/search/?maxResults=10000&amp;jql=project+%3D+HOP+AND+(%22Last+public+comment+date%22+%3E%3D+-33d+AND+%22Last+public+comment+date%22+%3C+-3d)+ORDER+BY+priority+DESC%2C+updated+DESC</url>
+=======
     <url>https://issues.apache.org/jira/rest/api/2/search?jql=project+%3D+HOP+AND+resolution+in+(Fixed%2C+%22Won%27t+Fix%22%2C+Duplicate%2C+%22Cannot+Reproduce%22%2C+Implemented%2C+Done%2C+Resolved%2C+%22Not+A+Bug%22)+AND+%22Last+public+comment+date%22+%3E%3D+-31d+ORDER+BY+priority+DESC%2C+updated+DESC&amp;decorator=none&amp;maxResults=500</url>
+>>>>>>> fb6edc92f94bdc4cee6a867c8a3b73571bc663ab
     <urlInField>N</urlInField>
     <dynamicMethod>N</dynamicMethod>
     <methodFieldName/>
