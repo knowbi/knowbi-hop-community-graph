@@ -1,0 +1,18 @@
+version: '3'
+services:
+  neo4j-data:
+    image: neo4j
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - NEO4J_AUTH=neo4j/abcdefgh
+      - NEO4JLABS_PLUGINS=["apoc"]
+      - NEO4J_apoc_trigger_enabled=true
+  neo4j-logging:
+    image: neo4j:latest
+    ports:
+        - "7475:7474"
+        - "7688:7687"
+    environment:
+        - NEO4J_AUTH=neo4j/abcdefgh
