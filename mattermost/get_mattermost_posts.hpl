@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pipeline>
   <info>
-    <name>pl_get_mattermost_posts</name>
+    <name>get_mattermost_posts</name>
     <name_sync_with_filename>Y</name_sync_with_filename>
     <description/>
     <extended_description/>
@@ -16,8 +16,6 @@
     <created_date>2020/11/27 14:21:32.343</created_date>
     <modified_user>-</modified_user>
     <modified_date>2020/11/27 14:21:32.343</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
-    <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
@@ -161,7 +159,7 @@
       <read_only_from_node>N</read_only_from_node>
       <labels>
         <label/>
-        <value>Post</value>
+        <value>POST</value>
       </labels>
       <properties>
         <property>
@@ -176,7 +174,7 @@
       <read_only_to_node>N</read_only_to_node>
       <labels>
         <label/>
-        <value>Post</value>
+        <value>POST</value>
       </labels>
       <properties>
         <property>
@@ -210,7 +208,7 @@
     <connection>lineage-graph</connection>
     <batch_size>1000</batch_size>
     <key/>
-    <create_indexes>Y</create_indexes>
+    <create_indexes>N</create_indexes>
     <use_create>N</use_create>
     <only_create_relationships>N</only_create_relationships>
     <returning_graph>N</returning_graph>
@@ -219,7 +217,7 @@
       <read_only_from_node>N</read_only_from_node>
       <labels>
         <label/>
-        <value>Post</value>
+        <value>POST</value>
       </labels>
       <properties>
         <property>
@@ -363,13 +361,11 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <nrclones>0</nrclones>
     <addcloneflag>N</addcloneflag>
-    <cloneflagfield/>
-    <nrcloneinfield>Y</nrcloneinfield>
-    <nrclonefield>nbPages</nrclonefield>
     <addclonenum>N</addclonenum>
-    <clonenumfield/>
+    <nrclonefield>nbPages</nrclonefield>
+    <nrcloneinfield>Y</nrcloneinfield>
+    <nrclones>0</nrclones>
     <attributes/>
     <GUI>
       <xloc>576</xloc>
@@ -659,7 +655,7 @@
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>//Script here
 
-var url = getVariable('mattermost_url', '') + '/api/v4/channels/' + channel_id + '/posts?page=' + pageNb;</jsScript_script>
+var url = getVariable('MM_URL', '') + '/api/v4/channels/' + channel_id + '/posts?page=' + pageNb;</jsScript_script>
       </jsScript>
     </jsScripts>
     <fields>
@@ -865,52 +861,35 @@ var url = getVariable('mattermost_url', '') + '/api/v4/channels/' + channel_id +
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <failIfNoFile>Y</failIfNoFile>
     <calculation>
-      <field_name>pageCount</field_name>
       <calc_type>CONSTANT</calc_type>
       <field_a>60.0</field_a>
-      <field_b/>
-      <field_c/>
-      <value_type>Number</value_type>
+      <field_name>pageCount</field_name>
+      <remove>Y</remove>
       <value_length>-1</value_length>
       <value_precision>-1</value_precision>
-      <remove>Y</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
+      <value_type>Number</value_type>
     </calculation>
     <calculation>
-      <field_name>tmpNbPages</field_name>
       <calc_type>DIVIDE</calc_type>
       <field_a>totalMsgCount</field_a>
       <field_b>pageCount</field_b>
-      <field_c/>
-      <value_type>Number</value_type>
+      <field_name>tmpNbPages</field_name>
+      <remove>Y</remove>
       <value_length>-1</value_length>
       <value_precision>-1</value_precision>
-      <remove>Y</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
+      <value_type>Number</value_type>
     </calculation>
     <calculation>
-      <field_name>nbPages</field_name>
       <calc_type>CEIL</calc_type>
       <field_a>tmpNbPages</field_a>
-      <field_b/>
-      <field_c/>
-      <value_type>Integer</value_type>
+      <field_name>nbPages</field_name>
+      <remove>N</remove>
       <value_length>-1</value_length>
       <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
+      <value_type>Integer</value_type>
     </calculation>
+    <failIfNoFile>Y</failIfNoFile>
     <attributes/>
     <GUI>
       <xloc>464</xloc>
@@ -929,30 +908,27 @@ var url = getVariable('mattermost_url', '') + '/api/v4/channels/' + channel_id +
       <schema_name/>
     </partitioning>
     <connection>lineage-graph</connection>
-    <cypher>match(c:Channel) 
+    <cypher>match(c:CHANNEL) 
 return c.id, c.displayName</cypher>
-    <batch_size/>
+    <cypher_from_field>N</cypher_from_field>
+    <mappings>
+</mappings>
     <read_only>N</read_only>
     <retry>Y</retry>
-    <cypher_from_field>N</cypher_from_field>
-    <cypher_field/>
-    <unwind>N</unwind>
-    <unwind_map/>
     <returning_graph>N</returning_graph>
-    <return_graph_field/>
-    <mappings/>
     <returns>
       <return>
         <name>c.id</name>
-        <type>String</type>
         <source_type>String</source_type>
+        <type>String</type>
       </return>
       <return>
         <name>c.displayName</name>
-        <type>String</type>
         <source_type>String</source_type>
+        <type>String</type>
       </return>
     </returns>
+    <unwind>N</unwind>
     <attributes/>
     <GUI>
       <xloc>1440</xloc>
@@ -970,30 +946,32 @@ return c.id, c.displayName</cypher>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>lineage-graph</connection>
-    <cypher>match (c:Channel) return c.id, toInteger(c.totalMsgCount) as totalMsgCount</cypher>
     <batch_size/>
+    <connection>lineage-graph</connection>
+    <cypher>match (c:CHANNEL) return c.id, toInteger(c.totalMsgCount) as totalMsgCount</cypher>
+    <cypher_field/>
+    <cypher_from_field>N</cypher_from_field>
+    <mappings>
+</mappings>
+    <nr_retries_on_error/>
     <read_only>N</read_only>
     <retry>Y</retry>
-    <cypher_from_field>N</cypher_from_field>
-    <cypher_field/>
-    <unwind>N</unwind>
-    <unwind_map/>
-    <returning_graph>N</returning_graph>
     <return_graph_field/>
-    <mappings/>
+    <returning_graph>N</returning_graph>
     <returns>
       <return>
         <name>c.id</name>
-        <type>String</type>
         <source_type>String</source_type>
+        <type>String</type>
       </return>
       <return>
         <name>totalMsgCount</name>
-        <type>Number</type>
         <source_type>Integer</source_type>
+        <type>Number</type>
       </return>
     </returns>
+    <unwind>N</unwind>
+    <unwind_map/>
     <attributes/>
     <GUI>
       <xloc>64</xloc>
@@ -1026,6 +1004,7 @@ return c.id, c.displayName</cypher>
     <preemptive>N</preemptive>
     <trustStoreFile/>
     <trustStorePassword>Encrypted </trustStorePassword>
+    <ignoreSsl>N</ignoreSsl>
     <headers>
       <header>
         <field>bearer</field>
@@ -1059,8 +1038,6 @@ return c.id, c.displayName</cypher>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <group>
-      </group>
     <fields>
       <field>
         <aggregate>prev_id</aggregate>
@@ -1069,10 +1046,35 @@ return c.id, c.displayName</cypher>
         <valuefield>1</valuefield>
       </field>
     </fields>
+    <group>
+</group>
     <attributes/>
     <GUI>
       <xloc>1424</xloc>
       <yloc>336</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>get sysdate</name>
+    <type>SystemInfo</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>sysdate</name>
+        <type>system date (variable)</type>
+      </field>
+    </fields>
+    <attributes/>
+    <GUI>
+      <xloc>1776</xloc>
+      <yloc>80</yloc>
     </GUI>
   </transform>
   <transform>
@@ -1088,16 +1090,12 @@ return c.id, c.displayName</cypher>
     </partitioning>
     <fields>
       <field>
-        <name>bearer</name>
-        <variable>Bearer ${MM_TOKEN}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
         <length>-1</length>
+        <name>bearer</name>
         <precision>-1</precision>
         <trim_type>none</trim_type>
+        <type>String</type>
+        <variable>Bearer ${MM_TOKEN}</variable>
       </field>
     </fields>
     <attributes/>
@@ -1118,29 +1116,26 @@ return c.id, c.displayName</cypher>
       <schema_name/>
     </partitioning>
     <connection>lineage-graph</connection>
-    <cypher>match(u:User) return u.id, u.username</cypher>
-    <batch_size/>
+    <cypher>match(u:USER) return u.id, u.username</cypher>
+    <cypher_from_field>N</cypher_from_field>
+    <mappings>
+</mappings>
     <read_only>N</read_only>
     <retry>Y</retry>
-    <cypher_from_field>N</cypher_from_field>
-    <cypher_field/>
-    <unwind>N</unwind>
-    <unwind_map/>
     <returning_graph>N</returning_graph>
-    <return_graph_field/>
-    <mappings/>
     <returns>
       <return>
         <name>u.id</name>
-        <type>String</type>
         <source_type>String</source_type>
+        <type>String</type>
       </return>
       <return>
         <name>u.username</name>
-        <type>String</type>
         <source_type>String</source_type>
+        <type>String</type>
       </return>
     </returns>
+    <unwind>N</unwind>
     <attributes/>
     <GUI>
       <xloc>1552</xloc>
@@ -1181,16 +1176,18 @@ return c.id, c.displayName</cypher>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <send_true_to>get sysdate</send_true_to>
-    <send_false_to>Text file output</send_false_to>
     <compare>
       <condition>
-        <negated>N</negated>
-        <leftvalue>id</leftvalue>
+        <conditions>
+</conditions>
         <function>IS NOT NULL</function>
-        <rightvalue/>
+        <leftvalue>id</leftvalue>
+        <negated>N</negated>
+        <operator>-</operator>
       </condition>
     </compare>
+    <send_false_to>Text file output</send_false_to>
+    <send_true_to>get sysdate</send_true_to>
     <attributes/>
     <GUI>
       <xloc>1664</xloc>
@@ -1208,14 +1205,14 @@ return c.id, c.displayName</cypher>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <start>0</start>
-    <increment>1</increment>
-    <resultfieldName>pageNb</resultfieldName>
     <fields>
       <field>
         <name>channel_id</name>
       </field>
     </fields>
+    <increment>1</increment>
+    <resultfieldName>pageNb</resultfieldName>
+    <start>0</start>
     <attributes/>
     <GUI>
       <xloc>688</xloc>
@@ -1254,7 +1251,7 @@ return c.id, c.displayName</cypher>
     <fields>
       <field>
         <name>id</name>
-        <path>$.*.</path>
+        <path>$.*</path>
         <type>String</type>
         <format/>
         <currency/>
@@ -1263,7 +1260,7 @@ return c.id, c.displayName</cypher>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
-        <repeat>N</repeat>
+        <repeat>Y</repeat>
       </field>
     </fields>
     <limit>0</limit>
@@ -1716,37 +1713,14 @@ return c.id, c.displayName</cypher>
     </partitioning>
     <transforms>
       <transform>
-        <name>:Post</name>
         <CopyNr>0</CopyNr>
+        <name>:Post</name>
       </transform>
     </transforms>
     <attributes/>
     <GUI>
       <xloc>1536</xloc>
       <yloc>336</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>get sysdate</name>
-    <type>SystemInfo</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>sysdate</name>
-        <type>system date (variable)</type>
-      </field>
-    </fields>
-    <attributes/>
-    <GUI>
-      <xloc>1776</xloc>
-      <yloc>80</yloc>
     </GUI>
   </transform>
   <transform_error_handling>

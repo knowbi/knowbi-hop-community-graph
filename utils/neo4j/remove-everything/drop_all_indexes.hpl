@@ -1,37 +1,21 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <pipeline>
   <info>
     <name>drop all indexes</name>
+    <name_sync_with_filename>N</name_sync_with_filename>
     <description/>
     <extended_description/>
     <pipeline_version/>
     <pipeline_type>Normal</pipeline_type>
-    <directory>/</directory>
     <parameters>
     </parameters>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <capture_transform_performance>N</capture_transform_performance>
     <transform_performance_capturing_delay>1000</transform_performance_capturing_delay>
     <transform_performance_capturing_size_limit>100</transform_performance_capturing_size_limit>
-    
-    
-    
-    
     <created_user>-</created_user>
     <created_date>2018/07/05 07:27:40.726</created_date>
     <modified_user>-</modified_user>
     <modified_date>2018/07/05 07:27:40.726</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
-    <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
@@ -63,7 +47,6 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <compatible>N</compatible>
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>
       <jsScript>
@@ -85,12 +68,9 @@ var cypher = "DROP INDEX "+name;
       </field>
     </fields>
     <attributes/>
-    <cluster_schema/>
-    
     <GUI>
       <xloc>736</xloc>
       <yloc>128</yloc>
-      <draw>Y</draw>
     </GUI>
   </transform>
   <transform>
@@ -104,37 +84,36 @@ var cypher = "DROP INDEX "+name;
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>lineage-graph</connection>
-    <cypher>call db.indexes()</cypher>
     <batch_size>1</batch_size>
+    <connection>lineage-graph</connection>
+    <cypher>show indexes;</cypher>
+    <cypher_field/>
+    <cypher_from_field>N</cypher_from_field>
+    <mappings>
+</mappings>
+    <nr_retries_on_error/>
     <read_only>N</read_only>
     <retry>Y</retry>
-    <cypher_from_field>N</cypher_from_field>
-    <cypher_field/>
-    <unwind>N</unwind>
-    <unwind_map/>
-    <returning_graph>N</returning_graph>
     <return_graph_field/>
-    <mappings/>
+    <returning_graph>N</returning_graph>
     <returns>
       <return>
         <name>description</name>
-        <type>String</type>
         <source_type/>
+        <type>String</type>
       </return>
       <return>
         <name>name</name>
-        <type>String</type>
         <source_type/>
+        <type>String</type>
       </return>
     </returns>
+    <unwind>N</unwind>
+    <unwind_map/>
     <attributes/>
-    <cluster_schema/>
-    
     <GUI>
       <xloc>160</xloc>
       <yloc>128</yloc>
-      <draw>Y</draw>
     </GUI>
   </transform>
   <transform>
@@ -148,26 +127,22 @@ var cypher = "DROP INDEX "+name;
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>lineage-graph</connection>
-    <cypher/>
     <batch_size>1</batch_size>
+    <connection>lineage-graph</connection>
+    <cypher_field>cypher</cypher_field>
+    <cypher_from_field>Y</cypher_from_field>
+    <mappings>
+</mappings>
     <read_only>N</read_only>
     <retry>Y</retry>
-    <cypher_from_field>Y</cypher_from_field>
-    <cypher_field>cypher</cypher_field>
-    <unwind>N</unwind>
-    <unwind_map/>
     <returning_graph>N</returning_graph>
-    <return_graph_field/>
-    <mappings/>
-    <returns/>
+    <returns>
+</returns>
+    <unwind>N</unwind>
     <attributes/>
-    <cluster_schema/>
-    
     <GUI>
       <xloc>1054</xloc>
       <yloc>128</yloc>
-      <draw>Y</draw>
     </GUI>
   </transform>
   <transform>
@@ -183,30 +158,22 @@ var cypher = "DROP INDEX "+name;
     </partitioning>
     <fields>
       <field>
+        <case_sensitive>N</case_sensitive>
         <in_stream_name>name</in_stream_name>
-        <out_stream_name/>
-        <use_regex>yes</use_regex>
+        <is_unicode>N</is_unicode>
         <replace_string>\"</replace_string>
-        <replace_by_string/>
         <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
+        <use_regex>Y</use_regex>
+        <whole_word>N</whole_word>
       </field>
     </fields>
     <attributes/>
-    <cluster_schema/>
-    
     <GUI>
       <xloc>458</xloc>
       <yloc>128</yloc>
-      <draw>Y</draw>
     </GUI>
   </transform>
   <transform_error_handling>
   </transform_error_handling>
-  
-  
   <attributes/>
 </pipeline>

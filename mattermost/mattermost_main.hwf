@@ -1,35 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workflow>
-  <name>wf_mattermost_main</name>
+  <name>mattermost_main</name>
   <name_sync_with_filename>Y</name_sync_with_filename>
   <description/>
   <extended_description/>
   <workflow_version/>
+  <workflow_status>0</workflow_status>
   <created_user>-</created_user>
   <created_date>2020/11/27 06:34:05.234</created_date>
   <modified_user>-</modified_user>
   <modified_date>2020/11/27 06:34:05.234</modified_date>
   <parameters>
-    </parameters>
-  <pass_batchid>N</pass_batchid>
+    <parameter>
+      <name>MM_PASSWORD</name>
+      <default_value/>
+      <description/>
+    </parameter>
+  </parameters>
   <actions>
     <action>
       <name>START</name>
       <description/>
       <type>SPECIAL</type>
       <attributes/>
-      <start>Y</start>
-      <dummy>N</dummy>
+      <DayOfMonth>1</DayOfMonth>
+      <hour>12</hour>
+      <intervalMinutes>60</intervalMinutes>
+      <intervalSeconds>0</intervalSeconds>
+      <minutes>0</minutes>
       <repeat>N</repeat>
       <schedulerType>0</schedulerType>
-      <intervalSeconds>0</intervalSeconds>
-      <intervalMinutes>60</intervalMinutes>
-      <hour>12</hour>
-      <minutes>0</minutes>
       <weekDay>1</weekDay>
-      <DayOfMonth>1</DayOfMonth>
       <parallel>N</parallel>
-      <nr>0</nr>
       <xloc>128</xloc>
       <yloc>48</yloc>
       <attributes_hac/>
@@ -39,7 +41,7 @@
       <description/>
       <type>PIPELINE</type>
       <attributes/>
-      <filename>${PROJECT_HOME}/mattermost/pl_get_mattermost_token.hpl</filename>
+      <filename>${PROJECT_HOME}/mattermost/get_mattermost_token.hpl</filename>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
@@ -52,14 +54,12 @@
       <loglevel>Basic</loglevel>
       <set_append_logfile>N</set_append_logfile>
       <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
       <create_parent_folder>N</create_parent_folder>
       <run_configuration>local</run_configuration>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
       </parameters>
       <parallel>N</parallel>
-      <nr>0</nr>
       <xloc>128</xloc>
       <yloc>141</yloc>
       <attributes_hac/>
@@ -69,7 +69,7 @@
       <description/>
       <type>PIPELINE</type>
       <attributes/>
-      <filename>${PROJECT_HOME}/mattermost/pl_get_mattermost_users.hpl</filename>
+      <filename>${PROJECT_HOME}/mattermost/get_mattermost_users.hpl</filename>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
@@ -82,14 +82,12 @@
       <loglevel>Basic</loglevel>
       <set_append_logfile>N</set_append_logfile>
       <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
       <create_parent_folder>N</create_parent_folder>
       <run_configuration>local</run_configuration>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
       </parameters>
       <parallel>N</parallel>
-      <nr>0</nr>
       <xloc>128</xloc>
       <yloc>327</yloc>
       <attributes_hac/>
@@ -99,7 +97,7 @@
       <description/>
       <type>PIPELINE</type>
       <attributes/>
-      <filename>${PROJECT_HOME}/mattermost/pl_get_mattermost_channels.hpl</filename>
+      <filename>${PROJECT_HOME}/mattermost/get_mattermost_channels.hpl</filename>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
@@ -112,14 +110,12 @@
       <loglevel>Basic</loglevel>
       <set_append_logfile>N</set_append_logfile>
       <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
       <create_parent_folder>N</create_parent_folder>
       <run_configuration>local</run_configuration>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
       </parameters>
       <parallel>N</parallel>
-      <nr>0</nr>
       <xloc>128</xloc>
       <yloc>420</yloc>
       <attributes_hac/>
@@ -129,7 +125,7 @@
       <description/>
       <type>PIPELINE</type>
       <attributes/>
-      <filename>${PROJECT_HOME}/mattermost/pl_get_mattermost_teams.hpl</filename>
+      <filename>${PROJECT_HOME}/mattermost/get_mattermost_teams.hpl</filename>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
@@ -142,14 +138,12 @@
       <loglevel>Basic</loglevel>
       <set_append_logfile>N</set_append_logfile>
       <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
       <create_parent_folder>N</create_parent_folder>
       <run_configuration>local</run_configuration>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
       </parameters>
       <parallel>N</parallel>
-      <nr>0</nr>
       <xloc>128</xloc>
       <yloc>234</yloc>
       <attributes_hac/>
@@ -159,7 +153,7 @@
       <description/>
       <type>PIPELINE</type>
       <attributes/>
-      <filename>${PROJECT_HOME}/mattermost/pl_get_mattermost_posts.hpl</filename>
+      <filename>${PROJECT_HOME}/mattermost/get_mattermost_posts.hpl</filename>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
@@ -172,14 +166,12 @@
       <loglevel>Basic</loglevel>
       <set_append_logfile>N</set_append_logfile>
       <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
       <create_parent_folder>N</create_parent_folder>
       <run_configuration>local</run_configuration>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
       </parameters>
       <parallel>N</parallel>
-      <nr>0</nr>
       <xloc>128</xloc>
       <yloc>513</yloc>
       <attributes_hac/>
@@ -189,7 +181,7 @@
       <description/>
       <type>PIPELINE</type>
       <attributes/>
-      <filename>${PROJECT_HOME}/mattermost/pl_get_mattermost_post_relationships.hpl</filename>
+      <filename>${PROJECT_HOME}/mattermost/get_mattermost_post_relationships.hpl</filename>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
@@ -202,14 +194,12 @@
       <loglevel>Basic</loglevel>
       <set_append_logfile>N</set_append_logfile>
       <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
       <create_parent_folder>N</create_parent_folder>
       <run_configuration>local</run_configuration>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
       </parameters>
       <parallel>N</parallel>
-      <nr>0</nr>
       <xloc>128</xloc>
       <yloc>606</yloc>
       <attributes_hac/>
@@ -220,9 +210,29 @@
       <type>SUCCESS</type>
       <attributes/>
       <parallel>N</parallel>
-      <nr>0</nr>
       <xloc>128</xloc>
       <yloc>699</yloc>
+      <attributes_hac/>
+    </action>
+    <action>
+      <name>create indexes</name>
+      <description/>
+      <type>NEO4J_CYPHER_SCRIPT</type>
+      <attributes/>
+      <connection>lineage-graph</connection>
+      <replace_variables>N</replace_variables>
+      <script>CREATE INDEX IF NOT EXISTS FOR (t:TEAM) on (t.id, t.displayName, t.name)
+;
+CREATE INDEX IF NOT EXISTS FOR(u:USER) ON (u.id, u.email)
+;
+CREATE INDEX IF NOT EXISTS FOR (c:CHANNEL) ON (c.id, c.displayName)
+;
+CREATE INDEX IF NOT EXISTS FOR (p:POST) ON (p.id)
+; 
+</script>
+      <parallel>N</parallel>
+      <xloc>240</xloc>
+      <yloc>144</yloc>
       <attributes_hac/>
     </action>
   </actions>
@@ -230,8 +240,6 @@
     <hop>
       <from>get users</from>
       <to>get channels</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
@@ -239,8 +247,6 @@
     <hop>
       <from>get token</from>
       <to>get teams</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
@@ -248,8 +254,6 @@
     <hop>
       <from>get teams</from>
       <to>get users</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
@@ -257,8 +261,6 @@
     <hop>
       <from>get channels</from>
       <to>get posts</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
@@ -266,26 +268,27 @@
     <hop>
       <from>get posts</from>
       <to>create post relationships</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create post relationships</from>
+      <to>Success</to>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>START</from>
-      <to>get token</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
+      <to>create indexes</to>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>create post relationships</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
+      <from>create indexes</from>
+      <to>get token</to>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pipeline>
   <info>
-    <name>pl_get_mattermost_channels</name>
+    <name>get_mattermost_users</name>
     <name_sync_with_filename>Y</name_sync_with_filename>
     <description/>
     <extended_description/>
@@ -13,48 +13,31 @@
     <transform_performance_capturing_delay>1000</transform_performance_capturing_delay>
     <transform_performance_capturing_size_limit>100</transform_performance_capturing_size_limit>
     <created_user>-</created_user>
-    <created_date>2020/11/27 12:42:28.384</created_date>
+    <created_date>2020/11/27 07:00:43.702</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2020/11/27 12:42:28.384</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
-    <is_key_private>N</is_key_private>
+    <modified_date>2020/11/27 07:00:43.702</modified_date>
   </info>
   <notepads>
   </notepads>
   <order>
     <hop>
-      <from>get token</from>
-      <to>get channels</to>
+      <from>Generate 1 row</from>
+      <to>Get token</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>get channels</from>
-      <to>parse channels</to>
+      <from>Get token</from>
+      <to>get users</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>parse channels</from>
+      <from>get users</from>
+      <to>parse users</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>parse users</from>
       <to>epoch -> date</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>parse channels</from>
-      <to>keep channel, team id</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>keep channel, team id</from>
-      <to>sort team, channel</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>sort team, channel</from>
-      <to>wait for :Channel</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>wait for :Channel</from>
-      <to>:TEAM_HAS_CHANNEL</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -64,12 +47,12 @@
     </hop>
     <hop>
       <from>get sysdate</from>
-      <to>:Channel</to>
+      <to>:USER</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <transform>
-    <name>:Channel</name>
+    <name>:USER</name>
     <type>Neo4JOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -82,7 +65,7 @@
     <connection>lineage-graph</connection>
     <batch_size>1000</batch_size>
     <key/>
-    <create_indexes>Y</create_indexes>
+    <create_indexes>N</create_indexes>
     <use_create>N</use_create>
     <only_create_relationships>N</only_create_relationships>
     <returning_graph>N</returning_graph>
@@ -91,7 +74,7 @@
       <read_only_from_node>N</read_only_from_node>
       <labels>
         <label/>
-        <value>Channel</value>
+        <value>USER</value>
       </labels>
       <properties>
         <property>
@@ -101,8 +84,8 @@
           <primary>Y</primary>
         </property>
         <property>
-          <name>displayName</name>
-          <value>display_name</value>
+          <name>email</name>
+          <value>email</value>
           <type>String</type>
           <primary>Y</primary>
         </property>
@@ -125,86 +108,80 @@
           <primary>N</primary>
         </property>
         <property>
-          <name>teamId</name>
-          <value>team_id</value>
+          <name>username</name>
+          <value>username</value>
           <type>String</type>
           <primary>N</primary>
         </property>
         <property>
-          <name>type</name>
-          <value>type</value>
+          <name>authData</name>
+          <value>auth_data</value>
           <type>String</type>
           <primary>N</primary>
         </property>
         <property>
-          <name>header</name>
-          <value>header</value>
+          <name>authService</name>
+          <value>auth_service</value>
           <type>String</type>
           <primary>N</primary>
         </property>
         <property>
-          <name>purpose</name>
-          <value>purpose</value>
+          <name>nickname</name>
+          <value>nickname</value>
           <type>String</type>
           <primary>N</primary>
         </property>
         <property>
-          <name>lastPostAt</name>
-          <value>last_post_at</value>
+          <name>firstName</name>
+          <value>first_name</value>
           <type>String</type>
           <primary>N</primary>
         </property>
         <property>
-          <name>totalMsgCount</name>
-          <value>total_msg_count</value>
+          <name>lastName</name>
+          <value>last_name</value>
           <type>String</type>
           <primary>N</primary>
         </property>
         <property>
-          <name>extraUpdateAt</name>
-          <value>extra_update_at</value>
+          <name>position</name>
+          <value>position</value>
           <type>String</type>
           <primary>N</primary>
         </property>
         <property>
-          <name>creatorId</name>
-          <value>creator_id</value>
+          <name>roles</name>
+          <value>roles</value>
           <type>String</type>
           <primary>N</primary>
         </property>
         <property>
-          <name>schemeId</name>
-          <value>scheme_id</value>
+          <name>lastPictureUpdate</name>
+          <value>last_picture_update</value>
           <type>String</type>
           <primary>N</primary>
         </property>
         <property>
-          <name>props</name>
-          <value>props</value>
+          <name>locale</name>
+          <value>locale</value>
           <type>String</type>
           <primary>N</primary>
         </property>
         <property>
-          <name>groupConstrained</name>
-          <value>group_constrained</value>
+          <name>automaticTimezone</name>
+          <value>automaticTimezone</value>
           <type>String</type>
           <primary>N</primary>
         </property>
         <property>
-          <name>teamDisplayName</name>
-          <value>team_display_name</value>
+          <name>manualTimezone</name>
+          <value>manualTimezone</value>
           <type>String</type>
           <primary>N</primary>
         </property>
         <property>
-          <name>teamName</name>
-          <value>team_name</value>
-          <type>String</type>
-          <primary>N</primary>
-        </property>
-        <property>
-          <name>teamUpdateAt</name>
-          <value>team_update_at</value>
+          <name>useAutomaticTime</name>
+          <value>useAutomaticTime</value>
           <type>String</type>
           <primary>N</primary>
         </property>
@@ -226,13 +203,13 @@
     <relprops/>
     <attributes/>
     <GUI>
-      <xloc>896</xloc>
-      <yloc>96</yloc>
+      <xloc>848</xloc>
+      <yloc>64</yloc>
     </GUI>
   </transform>
   <transform>
-    <name>:TEAM_HAS_CHANNEL</name>
-    <type>Neo4JOutput</type>
+    <name>Generate 1 row</name>
+    <type>RowGenerator</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -241,51 +218,44 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>lineage-graph</connection>
-    <batch_size>1000</batch_size>
-    <key/>
-    <create_indexes>N</create_indexes>
-    <use_create>N</use_create>
-    <only_create_relationships>Y</only_create_relationships>
-    <returning_graph>N</returning_graph>
-    <return_graph_field>graph</return_graph_field>
-    <from>
-      <read_only_from_node>N</read_only_from_node>
-      <labels>
-        <label/>
-        <value>Team</value>
-      </labels>
-      <properties>
-        <property>
-          <name>id</name>
-          <value>team_id</value>
-          <type>String</type>
-          <primary>Y</primary>
-        </property>
-      </properties>
-    </from>
-    <to>
-      <read_only_to_node>N</read_only_to_node>
-      <labels>
-        <label/>
-        <value>Channel</value>
-      </labels>
-      <properties>
-        <property>
-          <name>id</name>
-          <value>id</value>
-          <type>String</type>
-          <primary>Y</primary>
-        </property>
-      </properties>
-    </to>
-    <relationship/>
-    <relationship_value>TEAM_HAS_CHANNEL</relationship_value>
-    <relprops/>
+    <fields>
+</fields>
+    <interval_in_ms>5000</interval_in_ms>
+    <last_time_field>FiveSecondsAgo</last_time_field>
+    <limit>1</limit>
+    <never_ending>N</never_ending>
+    <row_time_field>now</row_time_field>
     <attributes/>
     <GUI>
-      <xloc>896</xloc>
-      <yloc>208</yloc>
+      <xloc>80</xloc>
+      <yloc>64</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Get token</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <length>-1</length>
+        <name>bearer</name>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <type>String</type>
+        <variable>Bearer ${MM_TOKEN}</variable>
+      </field>
+    </fields>
+    <attributes/>
+    <GUI>
+      <xloc>224</xloc>
+      <yloc>64</yloc>
     </GUI>
   </transform>
   <transform>
@@ -306,7 +276,7 @@
         <rename>created</rename>
         <type>Date</type>
         <length>-2</length>
-        <precision>-2</precision>
+        <precision>0</precision>
         <conversion_mask/>
         <date_format_lenient>false</date_format_lenient>
         <date_format_locale/>
@@ -323,7 +293,7 @@
         <rename>updated</rename>
         <type>Date</type>
         <length>-2</length>
-        <precision>-2</precision>
+        <precision>0</precision>
         <conversion_mask/>
         <date_format_lenient>false</date_format_lenient>
         <date_format_locale/>
@@ -340,7 +310,7 @@
         <rename>deleted</rename>
         <type>Date</type>
         <length>-2</length>
-        <precision>-2</precision>
+        <precision>0</precision>
         <conversion_mask/>
         <date_format_lenient>false</date_format_lenient>
         <date_format_locale/>
@@ -353,45 +323,11 @@
         <storage_type/>
       </meta>
       <meta>
-        <name>last_post_at</name>
-        <rename>last_post_at</rename>
+        <name>last_picture_update</name>
+        <rename>last_picture_update</rename>
         <type>Date</type>
         <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>extra_update_at</name>
-        <rename>extra_update_at</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-      <meta>
-        <name>team_update_at</name>
-        <rename>team_update_at</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>-2</precision>
+        <precision>0</precision>
         <conversion_mask/>
         <date_format_lenient>false</date_format_lenient>
         <date_format_locale/>
@@ -406,12 +342,35 @@
     </fields>
     <attributes/>
     <GUI>
-      <xloc>496</xloc>
-      <yloc>96</yloc>
+      <xloc>624</xloc>
+      <yloc>64</yloc>
     </GUI>
   </transform>
   <transform>
-    <name>get channels</name>
+    <name>get sysdate</name>
+    <type>SystemInfo</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>sysdate</name>
+        <type>system date (variable)</type>
+      </field>
+    </fields>
+    <attributes/>
+    <GUI>
+      <xloc>736</xloc>
+      <yloc>64</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>get users</name>
     <type>Rest</type>
     <description/>
     <distribute>Y</distribute>
@@ -423,7 +382,7 @@
     </partitioning>
     <applicationType>TEXT PLAIN</applicationType>
     <method>GET</method>
-    <url>${mattermost_url}/api/v4/channels</url>
+    <url>${MM_URL}/api/v4/users?per_page=200&amp;page=1</url>
     <urlInField>N</urlInField>
     <dynamicMethod>N</dynamicMethod>
     <methodFieldName/>
@@ -436,6 +395,7 @@
     <preemptive>N</preemptive>
     <trustStoreFile/>
     <trustStorePassword>Encrypted </trustStorePassword>
+    <ignoreSsl>N</ignoreSsl>
     <headers>
       <header>
         <field>bearer</field>
@@ -454,72 +414,15 @@
     </result>
     <attributes/>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>96</yloc>
+      <xloc>352</xloc>
+      <yloc>64</yloc>
     </GUI>
   </transform>
   <transform>
-    <name>get token</name>
-    <type>GetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>bearer</name>
-        <variable>Bearer ${MM_TOKEN}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-    <attributes/>
-    <GUI>
-      <xloc>112</xloc>
-      <yloc>96</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>keep channel, team id</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>id</name>
-      </field>
-      <field>
-        <name>team_id</name>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <GUI>
-      <xloc>496</xloc>
-      <yloc>208</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>parse channels</name>
+    <name>parse users</name>
     <type>JsonInput</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -598,8 +501,8 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>team_id</name>
-        <path>$.*.team_id</path>
+        <name>username</name>
+        <path>$.*.username</path>
         <type>String</type>
         <format/>
         <currency/>
@@ -611,8 +514,8 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>type</name>
-        <path>$.*.type</path>
+        <name>auth_data</name>
+        <path>$.*.auth_data</path>
         <type>String</type>
         <format/>
         <currency/>
@@ -624,8 +527,8 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>display_name</name>
-        <path>$.*.display_name</path>
+        <name>auth_service</name>
+        <path>$.*.auth_service</path>
         <type>String</type>
         <format/>
         <currency/>
@@ -637,8 +540,8 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>header</name>
-        <path>$.*.header</path>
+        <name>email</name>
+        <path>$.*.email</path>
         <type>String</type>
         <format/>
         <currency/>
@@ -650,8 +553,8 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>purpose</name>
-        <path>$.*.purpose</path>
+        <name>nickname</name>
+        <path>$.*.nickname</path>
         <type>String</type>
         <format/>
         <currency/>
@@ -663,8 +566,60 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>last_post_at</name>
-        <path>$.*.last_post_at</path>
+        <name>first_name</name>
+        <path>$.*.first_name</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>last_name</name>
+        <path>$.*.last_name</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>position</name>
+        <path>$.*.position</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>roles</name>
+        <path>$.*.roles</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>last_picture_update</name>
+        <path>$.*.last_picture_update</path>
         <type>Integer</type>
         <format/>
         <currency/>
@@ -676,34 +631,8 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>total_msg_count</name>
-        <path>$.*.total_msg_count</path>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>extra_update_at</name>
-        <path>$.*.extra_update_at</path>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>creator_id</name>
-        <path>$.*.creator_id</path>
+        <name>locale</name>
+        <path>$.*.locale</path>
         <type>String</type>
         <format/>
         <currency/>
@@ -715,8 +644,8 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>scheme_id</name>
-        <path>$.*.scheme_id</path>
+        <name>automaticTimezone</name>
+        <path>$.*.timezone.automaticTimezone</path>
         <type>String</type>
         <format/>
         <currency/>
@@ -728,8 +657,8 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>props</name>
-        <path>$.*.props</path>
+        <name>manualTimezone</name>
+        <path>$.*.timezone.manualTimezone</path>
         <type>String</type>
         <format/>
         <currency/>
@@ -741,48 +670,9 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>group_constrained</name>
-        <path>$.*.group_constrained</path>
+        <name>useAutomaticTime</name>
+        <path>$.*.timezone.useAutomaticTimezone</path>
         <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>team_display_name</name>
-        <path>$.*.team_display_name</path>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>team_name</name>
-        <path>$.*.team_name</path>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>team_update_at</name>
-        <path>$.*.team_update_at</path>
-        <type>Integer</type>
         <format/>
         <currency/>
         <decimal/>
@@ -807,96 +697,8 @@
     <sizeFieldName/>
     <attributes/>
     <GUI>
-      <xloc>384</xloc>
-      <yloc>96</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>sort team, channel</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>${java.io.tmpdir}</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>Y</unique_rows>
-    <fields>
-      <field>
-        <name>team_id</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>id</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <GUI>
-      <xloc>624</xloc>
-      <yloc>208</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>wait for :Channel</name>
-    <type>BlockUntilTransformsFinish</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <transforms>
-      <transform>
-        <name>:Channel</name>
-        <CopyNr>0</CopyNr>
-      </transform>
-    </transforms>
-    <attributes/>
-    <GUI>
-      <xloc>736</xloc>
-      <yloc>208</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>get sysdate</name>
-    <type>SystemInfo</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>sysdate</name>
-        <type>system date (variable)</type>
-      </field>
-    </fields>
-    <attributes/>
-    <GUI>
-      <xloc>624</xloc>
-      <yloc>96</yloc>
+      <xloc>496</xloc>
+      <yloc>64</yloc>
     </GUI>
   </transform>
   <transform_error_handling>

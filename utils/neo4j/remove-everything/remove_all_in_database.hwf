@@ -16,25 +16,21 @@
       <description/>
     </parameter>
   </parameters>
-  <pass_batchid>N</pass_batchid>
   <actions>
     <action>
       <name>START</name>
       <description/>
       <type>SPECIAL</type>
       <attributes/>
-      <start>Y</start>
-      <dummy>N</dummy>
+      <DayOfMonth>1</DayOfMonth>
+      <hour>12</hour>
+      <intervalMinutes>60</intervalMinutes>
+      <intervalSeconds>0</intervalSeconds>
+      <minutes>0</minutes>
       <repeat>N</repeat>
       <schedulerType>0</schedulerType>
-      <intervalSeconds>0</intervalSeconds>
-      <intervalMinutes>60</intervalMinutes>
-      <hour>12</hour>
-      <minutes>0</minutes>
       <weekDay>1</weekDay>
-      <DayOfMonth>1</DayOfMonth>
       <parallel>N</parallel>
-      <nr>0</nr>
       <xloc>160</xloc>
       <yloc>80</yloc>
       <attributes_hac/>
@@ -44,7 +40,7 @@
       <description/>
       <type>PIPELINE</type>
       <attributes/>
-      <filename>${PROJECT_HOME}/utils/neo4j/remove-everything/pl_drop_all_constraints.hpl</filename>
+      <filename>${PROJECT_HOME}/utils/neo4j/remove-everything/drop_all_constraints.hpl</filename>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
@@ -57,14 +53,12 @@
       <loglevel>Basic</loglevel>
       <set_append_logfile>N</set_append_logfile>
       <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
       <create_parent_folder>N</create_parent_folder>
       <run_configuration>local</run_configuration>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
       </parameters>
       <parallel>N</parallel>
-      <nr>0</nr>
       <xloc>160</xloc>
       <yloc>272</yloc>
       <attributes_hac/>
@@ -74,7 +68,7 @@
       <description/>
       <type>PIPELINE</type>
       <attributes/>
-      <filename>${PROJECT_HOME}/utils/neo4j/remove-everything/pl_rename_labels_in_blocks.hpl</filename>
+      <filename>${PROJECT_HOME}/utils/neo4j/remove-everything/rename_labels_in_blocks.hpl</filename>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
@@ -87,7 +81,6 @@
       <loglevel>Basic</loglevel>
       <set_append_logfile>N</set_append_logfile>
       <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
       <create_parent_folder>N</create_parent_folder>
       <run_configuration>local</run_configuration>
       <parameters>
@@ -99,7 +92,6 @@
         </parameter>
       </parameters>
       <parallel>N</parallel>
-      <nr>0</nr>
       <xloc>160</xloc>
       <yloc>560</yloc>
       <attributes_hac/>
@@ -109,7 +101,7 @@
       <description/>
       <type>PIPELINE</type>
       <attributes/>
-      <filename>${PROJECT_HOME}/utils/neo4j/remove-everything/pl_drop_all_indexes.hpl</filename>
+      <filename>${PROJECT_HOME}/utils/neo4j/remove-everything/drop_all_indexes.hpl</filename>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
@@ -122,14 +114,12 @@
       <loglevel>Basic</loglevel>
       <set_append_logfile>N</set_append_logfile>
       <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
       <create_parent_folder>N</create_parent_folder>
       <run_configuration>local</run_configuration>
       <parameters>
         <pass_all_parameters>Y</pass_all_parameters>
       </parameters>
       <parallel>N</parallel>
-      <nr>0</nr>
       <xloc>160</xloc>
       <yloc>368</yloc>
       <attributes_hac/>
@@ -139,7 +129,7 @@
       <description/>
       <type>PIPELINE</type>
       <attributes/>
-      <filename>${PROJECT_HOME}/utils/neo4j/remove-everything/pl_remove_all_relationships.hpl</filename>
+      <filename>${PROJECT_HOME}/utils/neo4j/remove-everything/remove_all_relationships.hpl</filename>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
       <clear_rows>N</clear_rows>
@@ -152,7 +142,6 @@
       <loglevel>Basic</loglevel>
       <set_append_logfile>N</set_append_logfile>
       <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
       <create_parent_folder>N</create_parent_folder>
       <run_configuration>local</run_configuration>
       <parameters>
@@ -164,7 +153,6 @@
         </parameter>
       </parameters>
       <parallel>N</parallel>
-      <nr>0</nr>
       <xloc>160</xloc>
       <yloc>464</yloc>
       <attributes_hac/>
@@ -185,7 +173,6 @@
         </field>
       </fields>
       <parallel>N</parallel>
-      <nr>0</nr>
       <xloc>160</xloc>
       <yloc>176</yloc>
       <attributes_hac/>
@@ -206,7 +193,6 @@
         </field>
       </fields>
       <parallel>N</parallel>
-      <nr>0</nr>
       <xloc>160</xloc>
       <yloc>656</yloc>
       <attributes_hac/>
@@ -217,7 +203,6 @@
       <type>SUCCESS</type>
       <attributes/>
       <parallel>N</parallel>
-      <nr>0</nr>
       <xloc>160</xloc>
       <yloc>752</yloc>
       <attributes_hac/>
@@ -227,8 +212,6 @@
     <hop>
       <from>drop all constraints</from>
       <to>drop all indexes</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
@@ -236,8 +219,6 @@
     <hop>
       <from>drop all indexes</from>
       <to>remove all relationships</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
@@ -245,8 +226,6 @@
     <hop>
       <from>remove all relationships</from>
       <to>remove all nodes</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
@@ -254,8 +233,6 @@
     <hop>
       <from>START</from>
       <to>unset ${NEO4J_LOGGING_CONNECTION}</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
@@ -263,8 +240,6 @@
     <hop>
       <from>unset ${NEO4J_LOGGING_CONNECTION}</from>
       <to>drop all constraints</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
@@ -272,8 +247,6 @@
     <hop>
       <from>remove all nodes</from>
       <to>Set ${NEO4J_LOGGING_CONNECTION}</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
@@ -281,8 +254,6 @@
     <hop>
       <from>Set ${NEO4J_LOGGING_CONNECTION}</from>
       <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
