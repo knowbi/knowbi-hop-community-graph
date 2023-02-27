@@ -176,15 +176,21 @@ foreach(x in coll | delete x)</script>
       <yloc>673</yloc>
       <attributes_hac/>
     </action>
+    <action>
+      <name>create indexes</name>
+      <description/>
+      <type>NEO4J_CYPHER_SCRIPT</type>
+      <attributes/>
+      <connection>lineage-graph</connection>
+      <replace_variables>N</replace_variables>
+      <script>CREATE INDEX post_id_idx IF NOT EXISTS FOR (p:POST) ON (p.id); </script>
+      <parallel>N</parallel>
+      <xloc>432</xloc>
+      <yloc>176</yloc>
+      <attributes_hac/>
+    </action>
   </actions>
   <hops>
-    <hop>
-      <from>remove_all_in_database.hwf</from>
-      <to>mattermost_main.hwf</to>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
     <hop>
       <from>START</from>
       <to>remove_all_in_database.hwf</to>
@@ -216,6 +222,20 @@ foreach(x in coll | delete x)</script>
     <hop>
       <from>finalize</from>
       <to>Success</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>remove_all_in_database.hwf</from>
+      <to>create indexes</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>create indexes</from>
+      <to>mattermost_main.hwf</to>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
