@@ -22,12 +22,7 @@
   <order>
     <hop>
       <from>Generate 1 row</from>
-      <to>Get token</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Get token</from>
-      <to>get users</to>
+      <to>Get token, user_page</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -48,6 +43,51 @@
     <hop>
       <from>get sysdate</from>
       <to>:USER</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>parse users</from>
+      <to>get nb_users</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>get nb_users</from>
+      <to>nb_users &lt; 200?</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Get token, user_page</from>
+      <to>build url</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>build url</from>
+      <to>get users</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>nb_users &lt; 200?</from>
+      <to>Set variables</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>build url</from>
+      <to>Write to log</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>nb_users &lt; 200?</from>
+      <to>Get variables</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Get variables</from>
+      <to>Calculator</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Calculator</from>
+      <to>Set variables 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -203,8 +243,45 @@
     <relprops/>
     <attributes/>
     <GUI>
-      <xloc>848</xloc>
+      <xloc>992</xloc>
       <yloc>64</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Calculator</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <calculation>
+      <calc_type>CONSTANT</calc_type>
+      <field_a>1</field_a>
+      <field_name>one</field_name>
+      <remove>N</remove>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <value_type>Integer</value_type>
+    </calculation>
+    <calculation>
+      <calc_type>ADD</calc_type>
+      <field_a>user_page</field_a>
+      <field_b>one</field_b>
+      <field_name>new_page_nb</field_name>
+      <remove>N</remove>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <value_type>Integer</value_type>
+    </calculation>
+    <failIfNoFile>Y</failIfNoFile>
+    <attributes/>
+    <GUI>
+      <xloc>1024</xloc>
+      <yloc>304</yloc>
     </GUI>
   </transform>
   <transform>
@@ -232,7 +309,7 @@
     </GUI>
   </transform>
   <transform>
-    <name>Get token</name>
+    <name>Get token, user_page</name>
     <type>GetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -251,10 +328,173 @@
         <type>String</type>
         <variable>Bearer ${MM_TOKEN}</variable>
       </field>
+      <field>
+        <format>0</format>
+        <length>-1</length>
+        <name>page_nb</name>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <type>Integer</type>
+        <variable>${MM_USERS_PAGE}</variable>
+      </field>
     </fields>
     <attributes/>
     <GUI>
-      <xloc>224</xloc>
+      <xloc>240</xloc>
+      <yloc>64</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Get variables</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <currency/>
+        <decimal/>
+        <format/>
+        <group/>
+        <length>-1</length>
+        <name>user_page</name>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <type>Integer</type>
+        <variable>${MM_USERS_PAGE}</variable>
+      </field>
+    </fields>
+    <attributes/>
+    <GUI>
+      <xloc>896</xloc>
+      <yloc>304</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Set variables</name>
+    <type>SetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <field_name>nb_users</field_name>
+        <variable_name>MM_USERS_DONE</variable_name>
+        <variable_type>PARENT_WORKFLOW</variable_type>
+      </field>
+    </fields>
+    <use_formatting>Y</use_formatting>
+    <attributes/>
+    <GUI>
+      <xloc>1056</xloc>
+      <yloc>176</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Set variables 2</name>
+    <type>SetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <field_name>new_page_nb</field_name>
+        <variable_name>MM_USERS_PAGE</variable_name>
+        <variable_type>JVM</variable_type>
+      </field>
+    </fields>
+    <use_formatting>Y</use_formatting>
+    <attributes/>
+    <GUI>
+      <xloc>1152</xloc>
+      <yloc>304</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Write to log</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage/>
+    <fields>
+      <field>
+        <name>page_nb</name>
+      </field>
+      <field>
+        <name>url</name>
+      </field>
+    </fields>
+    <attributes/>
+    <GUI>
+      <xloc>512</xloc>
+      <yloc>176</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>build url</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>//Script here
+
+// var page = getVariable('MM_USERS_PAGE', ''); 
+
+// if(page == null || page == '' || page == '${MM_USERS_PAGE}'){
+//  page = 1; 
+// }
+
+var url = getVariable('MM_URL', '') + '/api/v4/users?per_page=200&amp;page=' + page_nb</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>url</name>
+        <rename>url</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <GUI>
+      <xloc>384</xloc>
       <yloc>64</yloc>
     </GUI>
   </transform>
@@ -342,8 +582,35 @@
     </fields>
     <attributes/>
     <GUI>
-      <xloc>624</xloc>
+      <xloc>768</xloc>
       <yloc>64</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>get nb_users</name>
+    <type>MemoryGroupBy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <aggregate>nb_users</aggregate>
+        <subject>id</subject>
+        <type>COUNT_DISTINCT</type>
+      </field>
+    </fields>
+    <give_back_row>N</give_back_row>
+    <group>
+</group>
+    <attributes/>
+    <GUI>
+      <xloc>768</xloc>
+      <yloc>176</yloc>
     </GUI>
   </transform>
   <transform>
@@ -365,7 +632,7 @@
     </fields>
     <attributes/>
     <GUI>
-      <xloc>736</xloc>
+      <xloc>880</xloc>
       <yloc>64</yloc>
     </GUI>
   </transform>
@@ -382,13 +649,15 @@
     </partitioning>
     <applicationType>TEXT PLAIN</applicationType>
     <method>GET</method>
-    <url>${MM_URL}/api/v4/users?per_page=200&amp;page=1</url>
-    <urlInField>N</urlInField>
+    <url>${MM_URL}/api/v4/users?per_page=200&amp;page=2</url>
+    <urlInField>Y</urlInField>
     <dynamicMethod>N</dynamicMethod>
     <methodFieldName/>
-    <urlField/>
+    <urlField>url</urlField>
     <bodyField/>
     <httpLogin/>
+    <readTimeout/>
+    <connectionTimeout/>
     <httpPassword>Encrypted </httpPassword>
     <proxyHost/>
     <proxyPort/>
@@ -414,15 +683,53 @@
     </result>
     <attributes/>
     <GUI>
-      <xloc>352</xloc>
+      <xloc>496</xloc>
       <yloc>64</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>nb_users &lt; 200?</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compare>
+      <condition>
+        <conditions>
+</conditions>
+        <function>&lt;</function>
+        <leftvalue>nb_users</leftvalue>
+        <negated>N</negated>
+        <operator>-</operator>
+        <value>
+          <isnull>N</isnull>
+          <length>-1</length>
+          <mask>####0;-####0</mask>
+          <name>constant</name>
+          <precision>0</precision>
+          <text>200</text>
+          <type>Integer</type>
+        </value>
+      </condition>
+    </compare>
+    <send_false_to>Get variables</send_false_to>
+    <send_true_to>Set variables</send_true_to>
+    <attributes/>
+    <GUI>
+      <xloc>896</xloc>
+      <yloc>176</yloc>
     </GUI>
   </transform>
   <transform>
     <name>parse users</name>
     <type>JsonInput</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -697,7 +1004,7 @@
     <sizeFieldName/>
     <attributes/>
     <GUI>
-      <xloc>496</xloc>
+      <xloc>640</xloc>
       <yloc>64</yloc>
     </GUI>
   </transform>
