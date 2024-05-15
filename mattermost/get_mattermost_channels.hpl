@@ -224,7 +224,7 @@
     <relprops/>
     <attributes/>
     <GUI>
-      <xloc>896</xloc>
+      <xloc>960</xloc>
       <yloc>96</yloc>
     </GUI>
   </transform>
@@ -282,7 +282,7 @@
     <relprops/>
     <attributes/>
     <GUI>
-      <xloc>896</xloc>
+      <xloc>960</xloc>
       <yloc>208</yloc>
     </GUI>
   </transform>
@@ -428,6 +428,8 @@
     <urlField/>
     <bodyField/>
     <httpLogin/>
+    <readTimeout/>
+    <connectionTimeout/>
     <httpPassword>Encrypted </httpPassword>
     <proxyHost/>
     <proxyPort/>
@@ -890,7 +892,7 @@
     </transforms>
     <attributes/>
     <GUI>
-      <xloc>736</xloc>
+      <xloc>800</xloc>
       <yloc>208</yloc>
     </GUI>
   </transform>

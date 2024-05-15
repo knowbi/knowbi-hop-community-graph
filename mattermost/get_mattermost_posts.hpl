@@ -229,25 +229,25 @@
         <property>
           <name>createAt</name>
           <value>create_at</value>
-          <type>String</type>
+          <type>DateTime</type>
           <primary>N</primary>
         </property>
         <property>
           <name>updateAt</name>
           <value>update_at</value>
-          <type>String</type>
+          <type>DateTime</type>
           <primary>N</primary>
         </property>
         <property>
           <name>editAt</name>
           <value>edit_at</value>
-          <type>String</type>
+          <type>DateTime</type>
           <primary>N</primary>
         </property>
         <property>
           <name>deleteAt</name>
           <value>delete_at</value>
-          <type>String</type>
+          <type>DateTime</type>
           <primary>N</primary>
         </property>
         <property>
@@ -383,6 +383,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
+    <schema_definition/>
     <separator>;</separator>
     <enclosure>"</enclosure>
     <enclosure_forced>N</enclosure_forced>
@@ -946,17 +947,13 @@ return c.id, c.displayName</cypher>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <batch_size/>
     <connection>lineage-graph</connection>
     <cypher>match (c:CHANNEL) return c.id, toInteger(c.totalMsgCount) as totalMsgCount</cypher>
-    <cypher_field/>
     <cypher_from_field>N</cypher_from_field>
     <mappings>
 </mappings>
-    <nr_retries_on_error/>
     <read_only>N</read_only>
     <retry>Y</retry>
-    <return_graph_field/>
     <returning_graph>N</returning_graph>
     <returns>
       <return>
@@ -971,7 +968,6 @@ return c.id, c.displayName</cypher>
       </return>
     </returns>
     <unwind>N</unwind>
-    <unwind_map/>
     <attributes/>
     <GUI>
       <xloc>64</xloc>
@@ -998,6 +994,8 @@ return c.id, c.displayName</cypher>
     <urlField>url</urlField>
     <bodyField/>
     <httpLogin/>
+    <readTimeout/>
+    <connectionTimeout/>
     <httpPassword>Encrypted </httpPassword>
     <proxyHost/>
     <proxyPort/>

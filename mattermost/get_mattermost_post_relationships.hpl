@@ -212,17 +212,13 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <batch_size/>
     <connection>lineage-graph</connection>
     <cypher>match(c:CHANNEL) return c.id, c.displayName</cypher>
-    <cypher_field/>
     <cypher_from_field>N</cypher_from_field>
     <mappings>
 </mappings>
-    <nr_retries_on_error/>
     <read_only>N</read_only>
     <retry>Y</retry>
-    <return_graph_field/>
     <returning_graph>N</returning_graph>
     <returns>
       <return>
@@ -237,7 +233,6 @@
       </return>
     </returns>
     <unwind>N</unwind>
-    <unwind_map/>
     <attributes/>
     <GUI>
       <xloc>240</xloc>
@@ -255,17 +250,13 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <batch_size/>
     <connection>lineage-graph</connection>
     <cypher>match(n:POST) return distinct n.id, n.channel, n.username</cypher>
-    <cypher_field/>
     <cypher_from_field>N</cypher_from_field>
     <mappings>
 </mappings>
-    <nr_retries_on_error/>
     <read_only>N</read_only>
     <retry>Y</retry>
-    <return_graph_field/>
     <returning_graph>N</returning_graph>
     <returns>
       <return>
@@ -285,7 +276,6 @@
       </return>
     </returns>
     <unwind>N</unwind>
-    <unwind_map/>
     <attributes/>
     <GUI>
       <xloc>112</xloc>
@@ -303,17 +293,13 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <batch_size/>
     <connection>lineage-graph</connection>
     <cypher>match (u:USER) return u.id, u.username</cypher>
-    <cypher_field/>
     <cypher_from_field>N</cypher_from_field>
     <mappings>
 </mappings>
-    <nr_retries_on_error/>
     <read_only>N</read_only>
     <retry>Y</retry>
-    <return_graph_field/>
     <returning_graph>N</returning_graph>
     <returns>
       <return>
@@ -328,7 +314,6 @@
       </return>
     </returns>
     <unwind>N</unwind>
-    <unwind_map/>
     <attributes/>
     <GUI>
       <xloc>240</xloc>

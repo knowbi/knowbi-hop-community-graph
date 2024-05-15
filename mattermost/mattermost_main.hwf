@@ -63,32 +63,6 @@
       <attributes_hac/>
     </action>
     <action>
-      <name>get users</name>
-      <description/>
-      <type>PIPELINE</type>
-      <attributes/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <clear_files>N</clear_files>
-      <clear_rows>N</clear_rows>
-      <create_parent_folder>N</create_parent_folder>
-      <exec_per_row>N</exec_per_row>
-      <filename>${PROJECT_HOME}/mattermost/get_mattermost_users.hpl</filename>
-      <loglevel>Basic</loglevel>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <params_from_previous>N</params_from_previous>
-      <run_configuration>local</run_configuration>
-      <set_append_logfile>N</set_append_logfile>
-      <set_logfile>N</set_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <parallel>N</parallel>
-      <xloc>272</xloc>
-      <yloc>240</yloc>
-      <attributes_hac/>
-    </action>
-    <action>
       <name>get channels</name>
       <description/>
       <type>PIPELINE</type>
@@ -224,7 +198,7 @@ CREATE INDEX IF NOT EXISTS FOR (p:POST) ON (p.id)
       <attributes_hac/>
     </action>
     <action>
-      <name>Repeat</name>
+      <name>repeat users</name>
       <description/>
       <type>Repeat</type>
       <attributes/>
@@ -249,24 +223,33 @@ CREATE INDEX IF NOT EXISTS FOR (p:POST) ON (p.id)
       <attributes_hac/>
     </action>
     <action>
-      <name>Dummy</name>
+      <name>get_mattermost_user_sessions.hpl</name>
       <description/>
-      <type>DUMMY</type>
+      <type>PIPELINE</type>
       <attributes/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <clear_files>N</clear_files>
+      <clear_rows>N</clear_rows>
+      <create_parent_folder>N</create_parent_folder>
+      <exec_per_row>N</exec_per_row>
+      <filename>${PROJECT_HOME}/mattermost/get_mattermost_user_sessions.hpl</filename>
+      <loglevel>Basic</loglevel>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <params_from_previous>N</params_from_previous>
+      <run_configuration>local</run_configuration>
+      <set_append_logfile>N</set_append_logfile>
+      <set_logfile>N</set_logfile>
+      <wait_until_finished>Y</wait_until_finished>
       <parallel>N</parallel>
-      <xloc>320</xloc>
-      <yloc>464</yloc>
+      <xloc>128</xloc>
+      <yloc>416</yloc>
       <attributes_hac/>
     </action>
   </actions>
   <hops>
-    <hop>
-      <from>get users</from>
-      <to>get channels</to>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
     <hop>
       <from>get token</from>
       <to>get teams</to>
@@ -275,30 +258,23 @@ CREATE INDEX IF NOT EXISTS FOR (p:POST) ON (p.id)
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>get teams</from>
-      <to>get users</to>
-      <enabled>N</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>get channels</from>
       <to>get posts</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>get posts</from>
       <to>create post relationships</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>create post relationships</from>
       <to>Success</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -318,21 +294,21 @@ CREATE INDEX IF NOT EXISTS FOR (p:POST) ON (p.id)
     </hop>
     <hop>
       <from>get teams</from>
-      <to>Repeat</to>
+      <to>repeat users</to>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Repeat</from>
-      <to>get channels</to>
-      <enabled>N</enabled>
+      <from>repeat users</from>
+      <to>get_mattermost_user_sessions.hpl</to>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Repeat</from>
-      <to>Dummy</to>
+      <from>get_mattermost_user_sessions.hpl</from>
+      <to>get channels</to>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
