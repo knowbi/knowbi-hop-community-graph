@@ -71,11 +71,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>build url</from>
-      <to>Write to log</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
       <from>nb_users &lt; 200?</from>
       <to>get ${MM_USERS_PAGE}</to>
       <enabled>Y</enabled>
@@ -88,11 +83,6 @@
     <hop>
       <from>page + 1</from>
       <to>set ${MM_USERS_PAGE}</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>parse users</from>
-      <to>Write to log 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -248,7 +238,7 @@
     <relprops/>
     <attributes/>
     <GUI>
-      <xloc>1232</xloc>
+      <xloc>1228</xloc>
       <yloc>64</yloc>
     </GUI>
   </transform>
@@ -308,38 +298,8 @@
     </fields>
     <attributes/>
     <GUI>
-      <xloc>240</xloc>
+      <xloc>244</xloc>
       <yloc>64</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>Write to log</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <loglevel>log_level_basic</loglevel>
-    <displayHeader>Y</displayHeader>
-    <limitRows>N</limitRows>
-    <limitRowsNumber>0</limitRowsNumber>
-    <logmessage/>
-    <fields>
-      <field>
-        <name>page_nb</name>
-      </field>
-      <field>
-        <name>url</name>
-      </field>
-    </fields>
-    <attributes/>
-    <GUI>
-      <xloc>512</xloc>
-      <yloc>176</yloc>
     </GUI>
   </transform>
   <transform>
@@ -381,7 +341,7 @@ var url = getVariable('MM_URL', '') + '/api/v4/users?per_page=200&amp;page=' + p
     </fields>
     <attributes/>
     <GUI>
-      <xloc>384</xloc>
+      <xloc>408</xloc>
       <yloc>64</yloc>
     </GUI>
   </transform>
@@ -469,7 +429,7 @@ var url = getVariable('MM_URL', '') + '/api/v4/users?per_page=200&amp;page=' + p
     </fields>
     <attributes/>
     <GUI>
-      <xloc>768</xloc>
+      <xloc>900</xloc>
       <yloc>64</yloc>
     </GUI>
   </transform>
@@ -496,7 +456,7 @@ var url = getVariable('MM_URL', '') + '/api/v4/users?per_page=200&amp;page=' + p
     </fields>
     <attributes/>
     <GUI>
-      <xloc>896</xloc>
+      <xloc>900</xloc>
       <yloc>304</yloc>
     </GUI>
   </transform>
@@ -523,7 +483,7 @@ var url = getVariable('MM_URL', '') + '/api/v4/users?per_page=200&amp;page=' + p
 </group>
     <attributes/>
     <GUI>
-      <xloc>768</xloc>
+      <xloc>736</xloc>
       <yloc>176</yloc>
     </GUI>
   </transform>
@@ -546,7 +506,7 @@ var url = getVariable('MM_URL', '') + '/api/v4/users?per_page=200&amp;page=' + p
     </fields>
     <attributes/>
     <GUI>
-      <xloc>896</xloc>
+      <xloc>1064</xloc>
       <yloc>64</yloc>
     </GUI>
   </transform>
@@ -597,7 +557,7 @@ var url = getVariable('MM_URL', '') + '/api/v4/users?per_page=200&amp;page=' + p
     </result>
     <attributes/>
     <GUI>
-      <xloc>496</xloc>
+      <xloc>572</xloc>
       <yloc>64</yloc>
     </GUI>
   </transform>
@@ -635,7 +595,7 @@ var url = getVariable('MM_URL', '') + '/api/v4/users?per_page=200&amp;page=' + p
     <send_true_to>set ${MM_USERS_DONE}</send_true_to>
     <attributes/>
     <GUI>
-      <xloc>896</xloc>
+      <xloc>900</xloc>
       <yloc>176</yloc>
     </GUI>
   </transform>
@@ -955,7 +915,7 @@ var url = getVariable('MM_URL', '') + '/api/v4/users?per_page=200&amp;page=' + p
     <sizeFieldName/>
     <attributes/>
     <GUI>
-      <xloc>640</xloc>
+      <xloc>736</xloc>
       <yloc>64</yloc>
     </GUI>
   </transform>
@@ -1007,33 +967,6 @@ var url = getVariable('MM_URL', '') + '/api/v4/users?per_page=200&amp;page=' + p
     <GUI>
       <xloc>1232</xloc>
       <yloc>304</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>Write to log 2</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <loglevel>log_level_basic</loglevel>
-    <displayHeader>Y</displayHeader>
-    <limitRows>N</limitRows>
-    <limitRowsNumber>0</limitRowsNumber>
-    <logmessage/>
-    <fields>
-      <field>
-        <name>username</name>
-      </field>
-    </fields>
-    <attributes/>
-    <GUI>
-      <xloc>688</xloc>
-      <yloc>256</yloc>
     </GUI>
   </transform>
   <transform_error_handling>

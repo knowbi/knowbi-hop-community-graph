@@ -213,7 +213,7 @@
       <schema_name/>
     </partitioning>
     <connection>lineage-graph</connection>
-    <cypher>match(c:CHANNEL) return c.id, c.displayName</cypher>
+    <cypher>match(c:CHANNEL {teamDisplayName: "Apache Hop"}) return c.id, c.displayName</cypher>
     <cypher_from_field>N</cypher_from_field>
     <mappings>
 </mappings>
@@ -250,13 +250,17 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
+    <batch_size/>
     <connection>lineage-graph</connection>
-    <cypher>match(n:POST) return distinct n.id, n.channel, n.username</cypher>
+    <cypher>match(n:POST) return distinct n.id, n.channel, n.channel_id, n.username</cypher>
+    <cypher_field/>
     <cypher_from_field>N</cypher_from_field>
     <mappings>
 </mappings>
+    <nr_retries_on_error/>
     <read_only>N</read_only>
     <retry>Y</retry>
+    <return_graph_field/>
     <returning_graph>N</returning_graph>
     <returns>
       <return>
@@ -270,12 +274,18 @@
         <type>String</type>
       </return>
       <return>
+        <name>n.channel_id</name>
+        <source_type>String</source_type>
+        <type>String</type>
+      </return>
+      <return>
         <name>n.username</name>
         <source_type>String</source_type>
         <type>String</type>
       </return>
     </returns>
     <unwind>N</unwind>
+    <unwind_map/>
     <attributes/>
     <GUI>
       <xloc>112</xloc>

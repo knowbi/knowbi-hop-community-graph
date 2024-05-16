@@ -396,6 +396,8 @@
     <urlField/>
     <bodyField/>
     <httpLogin/>
+    <readTimeout/>
+    <connectionTimeout/>
     <httpPassword>Encrypted </httpPassword>
     <proxyHost/>
     <proxyPort/>

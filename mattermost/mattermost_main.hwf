@@ -32,8 +32,8 @@
       <schedulerType>0</schedulerType>
       <weekDay>1</weekDay>
       <parallel>N</parallel>
-      <xloc>128</xloc>
-      <yloc>48</yloc>
+      <xloc>80</xloc>
+      <yloc>112</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -58,8 +58,8 @@
       <set_logfile>N</set_logfile>
       <wait_until_finished>Y</wait_until_finished>
       <parallel>N</parallel>
-      <xloc>128</xloc>
-      <yloc>141</yloc>
+      <xloc>474</xloc>
+      <yloc>112</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -84,8 +84,8 @@
       <set_logfile>N</set_logfile>
       <wait_until_finished>Y</wait_until_finished>
       <parallel>N</parallel>
-      <xloc>128</xloc>
-      <yloc>496</yloc>
+      <xloc>672</xloc>
+      <yloc>240</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -110,8 +110,8 @@
       <set_logfile>N</set_logfile>
       <wait_until_finished>Y</wait_until_finished>
       <parallel>N</parallel>
-      <xloc>128</xloc>
-      <yloc>234</yloc>
+      <xloc>671</xloc>
+      <yloc>112</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -136,8 +136,8 @@
       <set_logfile>N</set_logfile>
       <wait_until_finished>Y</wait_until_finished>
       <parallel>N</parallel>
-      <xloc>128</xloc>
-      <yloc>592</yloc>
+      <xloc>288</xloc>
+      <yloc>368</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -162,18 +162,8 @@
       <set_logfile>N</set_logfile>
       <wait_until_finished>Y</wait_until_finished>
       <parallel>N</parallel>
-      <xloc>128</xloc>
-      <yloc>688</yloc>
-      <attributes_hac/>
-    </action>
-    <action>
-      <name>Success</name>
-      <description/>
-      <type>SUCCESS</type>
-      <attributes/>
-      <parallel>N</parallel>
-      <xloc>128</xloc>
-      <yloc>784</yloc>
+      <xloc>480</xloc>
+      <yloc>368</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -193,8 +183,8 @@ CREATE INDEX IF NOT EXISTS FOR (p:POST) ON (p.id)
 ; 
 </script>
       <parallel>N</parallel>
-      <xloc>240</xloc>
-      <yloc>144</yloc>
+      <xloc>277</xloc>
+      <yloc>112</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -218,8 +208,8 @@ CREATE INDEX IF NOT EXISTS FOR (p:POST) ON (p.id)
       <logfile_update_interval>5000</logfile_update_interval>
       <parameters/>
       <parallel>N</parallel>
-      <xloc>128</xloc>
-      <yloc>320</yloc>
+      <xloc>288</xloc>
+      <yloc>240</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -244,8 +234,8 @@ CREATE INDEX IF NOT EXISTS FOR (p:POST) ON (p.id)
       <set_logfile>N</set_logfile>
       <wait_until_finished>Y</wait_until_finished>
       <parallel>N</parallel>
-      <xloc>128</xloc>
-      <yloc>416</yloc>
+      <xloc>480</xloc>
+      <yloc>240</yloc>
       <attributes_hac/>
     </action>
   </actions>
@@ -267,13 +257,6 @@ CREATE INDEX IF NOT EXISTS FOR (p:POST) ON (p.id)
     <hop>
       <from>get posts</from>
       <to>create post relationships</to>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>create post relationships</from>
-      <to>Success</to>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>

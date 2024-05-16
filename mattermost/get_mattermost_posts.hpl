@@ -102,11 +102,11 @@
     </hop>
     <hop>
       <from>get prev_id</from>
-      <to>wait for :Post</to>
+      <to>wait for :POST</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>wait for :Post</from>
+      <from>wait for :POST</from>
       <to>:FOLLOWS</to>
       <enabled>Y</enabled>
     </hop>
@@ -132,7 +132,7 @@
     </hop>
     <hop>
       <from>get sysdate</from>
-      <to>:Post</to>
+      <to>:POST out</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -195,7 +195,7 @@
     </GUI>
   </transform>
   <transform>
-    <name>:Post</name>
+    <name>:POST out</name>
     <type>Neo4JOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -259,6 +259,12 @@
         <property>
           <name>username</name>
           <value>username</value>
+          <type>String</type>
+          <primary>N</primary>
+        </property>
+        <property>
+          <name>channelId</name>
+          <value>channel_id</value>
           <type>String</type>
           <primary>N</primary>
         </property>
@@ -1048,7 +1054,7 @@ return c.id, c.displayName</cypher>
 </group>
     <attributes/>
     <GUI>
-      <xloc>1424</xloc>
+      <xloc>1440</xloc>
       <yloc>336</yloc>
     </GUI>
   </transform>
@@ -1699,7 +1705,7 @@ return c.id, c.displayName</cypher>
     </GUI>
   </transform>
   <transform>
-    <name>wait for :Post</name>
+    <name>wait for :POST</name>
     <type>BlockUntilTransformsFinish</type>
     <description/>
     <distribute>Y</distribute>
@@ -1712,12 +1718,12 @@ return c.id, c.displayName</cypher>
     <transforms>
       <transform>
         <CopyNr>0</CopyNr>
-        <name>:Post</name>
+        <name>:POST out</name>
       </transform>
     </transforms>
     <attributes/>
     <GUI>
-      <xloc>1536</xloc>
+      <xloc>1664</xloc>
       <yloc>336</yloc>
     </GUI>
   </transform>
