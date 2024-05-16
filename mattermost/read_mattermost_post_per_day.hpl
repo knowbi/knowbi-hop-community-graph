@@ -188,14 +188,18 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
+    <batch_size/>
     <connection>lineage-graph</connection>
-    <cypher>match (p:POST) return p.createAt.year as post_year, p.createAt.month as post_month, count(p) as nb_posts
+    <cypher>match (c:CHANNEL {teamDisplayName: "Apache Hop"} )-[:CHANNEL_HAS_POST]->(p:POST) return p.createAt.year as post_year, p.createAt.month as post_month, count(p) as nb_posts
 order by p.createAt.year, p.createAt.month</cypher>
+    <cypher_field/>
     <cypher_from_field>N</cypher_from_field>
     <mappings>
 </mappings>
+    <nr_retries_on_error/>
     <read_only>N</read_only>
     <retry>Y</retry>
+    <return_graph_field/>
     <returning_graph>N</returning_graph>
     <returns>
       <return>
@@ -215,6 +219,7 @@ order by p.createAt.year, p.createAt.month</cypher>
       </return>
     </returns>
     <unwind>N</unwind>
+    <unwind_map/>
     <attributes/>
     <GUI>
       <xloc>112</xloc>
